@@ -222,7 +222,9 @@ def Categories():
 @app.route('/BalanceTracking', methods=['POST','GET'])
 def BalanceTracking():
     global finance_app
+    global username
     finance_app = finance_app
+    username = username
     app.logger.debug("This is a debug message from the index route.")
     BalanceTrack = Balance_Tracking()
     account = Account()
@@ -459,6 +461,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
