@@ -116,6 +116,8 @@ def register():
                 return redirect(url_for('BalanceTracking'))
 
 def Bill(x,y):
+    global finance_app
+    finance_app = finance_app
     Bills = pd.read_sql(f'SELECT * FROM {username}.recurring_transactions;',finance_app)
     Bills = Bills.rename(columns={'Start_Date':'Next Date'})
     Bills = Bills[Bills['idrecurring_transactions']==x]
@@ -132,6 +134,8 @@ def Bill(x,y):
     return Bill
 
 def Balance_Tracking():
+    global finance_app
+    finance_app = finance_app
     transactions = pd.read_sql('SELECT * from transactions;',finance_app)
     transactions['Date'] = pd.to_datetime(transactions['Date'])
     Balances = transactions.groupby(['Account'])['Amount'].sum()
@@ -188,6 +192,8 @@ def Balance_Tracking():
     return BalanceTrack
 
 def Transact():
+    global finance_app
+    finance_app = finance_app
     transactions = pd.read_sql('SELECT * from transactions;',finance_app)
     transaction = transactions
     return transaction
@@ -202,6 +208,8 @@ def Balances():
     return balance
 
 def Account():
+    global finance_app
+    finance_app = finance_app
     transactions = pd.read_sql('SELECT * from transactions;',finance_app)
     transactions['Date'] = pd.to_datetime(transactions['Date'])
     account = transactions['Account'].unique()
@@ -210,6 +218,8 @@ def Account():
     return account
 
 def Categories():
+    global finance_app
+    finance_app = finance_app
     categories = pd.read_sql(f'SELECT * FROM {username}.categories;',finance_app)
     categories = categories.drop(columns=['idcategories'])
     categories = categories['Category'].unique()
@@ -271,6 +281,8 @@ def BalanceTracking():
 
 @app.route('/addaccount/', methods=['POST'])
 def addacct():
+    global finance_app
+    finance_app = finance_app
     if request.method == 'POST':
         Account = request.form.get('Account')
         AccountType = request.form.get('AccountType')
@@ -285,6 +297,8 @@ def addacct():
 
 @app.route('/recurringtran/', methods=['POST'])
 def rectran():
+    global finance_app
+    finance_app = finance_app
     if request.method == 'POST':
         Bill = request.form.get('Bill')
         Frequency = request.form.get('Frequency')
@@ -298,6 +312,8 @@ def rectran():
 
 @app.route('/recurringtrandel/', methods=['POST'])
 def rectrandel():
+    global finance_app
+    finance_app = finance_app
     if request.method == 'POST':
         Bill = request.form.get('ID')
         finance_app.execute(text(f"DELETE FROM {username}.`recurring_transactions` WHERE (`idrecurring transactions` = :Bill)"),{'Bill':Bill})
@@ -306,6 +322,8 @@ def rectrandel():
     
 @app.route('/recurringtranpaid/', methods=['POST'])
 def rectranpaid():
+    global finance_app
+    finance_app = finance_app
     if request.method == 'POST':
         Bills = pd.read_sql(f'SELECT * FROM {username}.recurring_transactions;',finance_app)
         Bills = Bills.rename(columns={'Start_Date':'Next Date'})
@@ -338,6 +356,8 @@ def rectranpaid():
     
 @app.route('/recurringtranedit/', methods=['POST','GET'])
 def rectranedit():
+    global finance_app
+    finance_app = finance_app
     if request.method == 'POST':
         ID = request.form.get('ID')
         Bill = request.form.get('Bill')
@@ -374,6 +394,8 @@ def Transactions():
 
 @app.route('/trandel/', methods=['POST'])
 def trandel():
+    global finance_app
+    finance_app = finance_app
     if request.method == 'POST':
         Tran = request.form.get('ID')
         finance_app.execute(text(f"DELETE FROM {username}.`transactions` WHERE (`idTransactions` = :Tran)"),{'Tran':Tran})
@@ -382,6 +404,8 @@ def trandel():
 
 @app.route('/tranadd/', methods=['POST','GET'])
 def tranadd():
+    global finance_app
+    finance_app = finance_app
     if request.method == 'POST':
         Date = request.form.get('Date')
         Transaction = request.form.get('Transaction')
@@ -395,6 +419,8 @@ def tranadd():
 
 @app.route('/tranedit/', methods=['POST','GET'])
 def tranedit():
+    global finance_app
+    finance_app = finance_app
     if request.method == 'POST':
         ID = request.form.get('ID')
         Date = request.form.get('Date1')
@@ -409,6 +435,8 @@ def tranedit():
 
 @app.route('/tranupload/', methods=['POST','GET'])
 def tranupload():
+    global finance_app
+    finance_app = finance_app
     if request.method == 'POST':
         csv = request.files.get('CSV')
         csv_df = pd.read_csv(csv)
@@ -456,6 +484,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
