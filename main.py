@@ -116,6 +116,7 @@ def register():
                 return redirect(url_for('BalanceTracking'))
 
 def Bill(x,y):
+    print(username)
     Bills = pd.read_sql(f'SELECT * FROM {username}.recurring_transactions;',finance_app)
     Bills = Bills.rename(columns={'Start_Date':'Next Date'})
     Bills = Bills[Bills['idrecurring_transactions']==x]
@@ -147,6 +148,7 @@ def Balance_Tracking():
     BalanceTracking = pd.DataFrame(columns=['Date','Transaction','Amount','Balance','Account'])
     for i in accts:
         account = i
+        print(username)
         Bills = pd.read_sql(f'SELECT * FROM {username}.recurring_transactions;',finance_app)
         Bills = Bills.drop(columns=['idrecurring_transactions'])
         Bills = Bills[Bills['Account']==account]
@@ -210,6 +212,7 @@ def Account():
     return account
 
 def Categories():
+    print(username)
     categories = pd.read_sql(f'SELECT * FROM {username}.categories;',finance_app)
     categories = categories.drop(columns=['idcategories'])
     categories = categories['Category'].unique()
@@ -221,6 +224,7 @@ def BalanceTracking():
     app.logger.debug("This is a debug message from the index route.")
     BalanceTrack = Balance_Tracking()
     account = Account()
+    print(username)
     Bills = pd.read_sql(f'SELECT * FROM {username}.recurring_transactions;',finance_app)
     Bills = Bills.rename(columns={'Start_Date':'Next Date'})
     Bills['Amount'] =  Bills['Amount'].apply(lambda x: f"${x:,.2f}")
@@ -272,6 +276,7 @@ def addacct():
         AccountType = request.form.get('AccountType')
         OpenDate = request.form.get('OpenDate')
         StartingBal = request.form.get('StartingBalance')
+        print(username)
         finance_app.execute(text(f'INSERT INTO {username}.`accounts` (`Account`, `Account Type`) VALUES (:Account, :AccountType)'),
                          {'Account':Account,'AccountType':AccountType})
         finance_app.execute(text(f"""INSERT INTO {username}.`transactions` (`Date`, `Transaction`, `Amount`, `Category`, `Account`) VALUES (:Date, 'Starting Balance', :Amount, 'Starting Balance', :Account);"""),
@@ -452,6 +457,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
