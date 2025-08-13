@@ -54,6 +54,67 @@ def trans(x,y,table):
         transactions = transactions.iat[0,5]
     return transactions
 
+@app.route('/', methods=['POST','GET'])
+def signin():
+    global username
+    username = request.form.get('User')
+    if username != None:
+        username = username.lower()
+        password = request.form.get('Password')
+        Ok = login(username,password)
+        if Ok == 'Pass':
+            global finance_app
+            engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
+            finance_app = engine.connect()
+            return redirect(url_for('BalanceTracking'))
+        elif Ok == 'Fail':
+            return render_template('LoginFail.html')
+    else:
+        return render_template('Login.html')
+
+@app.route('/Register',methods=['POST','GET'])
+def register():
+    global username
+    ph = PasswordHasher()
+    engine = create_engine("mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/users", echo=True)
+    users = engine.connect()
+    x = 1
+    username = request.form.get('User')
+    if username == None:
+        return render_template('Register.html')
+    else:
+        while x == 1:
+            user = pd.read_sql('SELECT * FROM users.users;',users)
+            if username in user:
+                return render_template('RegisterUserTaken.html')
+            else:
+                username = username.lower()
+                password = request.form.get('Password')
+                password = ph.hash(password)
+                users.execute(text('INSERT INTO `users`.`users` (`Username`, `Password`) VALUES (:Username, :Password)'),
+                         {'Username':username,'Password':password})
+                users.commit()
+                mydb = mysql.connector.connect(host='127.0.0.1',user='root',password='Printhelloworld1!')
+                mycursor = mydb.cursor()
+                mycursor.execute(f'CREATE DATABASE {username}')
+                mydb.close
+                global finance_app
+                engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
+                finance_app = engine.connect()
+                finance_app.execute(text(f"""CREATE TABLE {username}.`accounts` (`idaccounts` INT NOT NULL AUTO_INCREMENT,`Account` VARCHAR(45) NOT NULL,`Account Type` VARCHAR(45) NOT NULL,PRIMARY KEY (`idaccounts`),UNIQUE INDEX `Account_UNIQUE` (`Account` ASC) VISIBLE);"""))
+                finance_app.execute(text(f"""CREATE TABLE {username}.`categories` (`idcategories` INT NOT NULL AUTO_INCREMENT,`Category` VARCHAR(45) NOT NULL,PRIMARY KEY (`idcategories`),UNIQUE INDEX `Category_UNIQUE` (`Category` ASC) VISIBLE);"""))
+                finance_app.execute(text(f"""CREATE TABLE {username}.`investment transactions` (`idinvestment transactions` INT NOT NULL AUTO_INCREMENT,`Date` DATE NOT NULL,`Transaction` VARCHAR(45) NOT NULL,`Ticker` VARCHAR(45) NOT NULL,`Quantity` FLOAT NULL DEFAULT NULL,`Price` FLOAT NULL DEFAULT NULL,`Amount` FLOAT NOT NULL,`Account` VARCHAR(45) NOT NULL,PRIMARY KEY (`idinvestment transactions`));"""))
+                finance_app.execute(text(f"""CREATE TABLE {username}.`investment_accounts` (`idinvestment_accounts` INT NOT NULL AUTO_INCREMENT,`Account` VARCHAR(45) NOT NULL,`Account Type` VARCHAR(45) NOT NULL,PRIMARY KEY (`idinvestment_accounts`),UNIQUE INDEX `Account_UNIQUE` (`Account` ASC) VISIBLE);"""))
+                finance_app.execute(text(f"""CREATE TABLE {username}.`recurring_transactions` (`idrecurring_transactions` INT NOT NULL AUTO_INCREMENT,`Bill` VARCHAR(45) NOT NULL,`Frequency` VARCHAR(45) NOT NULL,`Start_Date` DATE NOT NULL,`Amount` FLOAT NOT NULL,`Account` VARCHAR(45) NOT NULL,PRIMARY KEY (`idrecurring_transactions`));"""))
+                finance_app.execute(text(f"""CREATE TABLE {username}.`transactions` (`idtransactions` INT NOT NULL AUTO_INCREMENT,`Date` DATE NOT NULL,`Transaction` VARCHAR(45) NOT NULL,`Amount` FLOAT NOT NULL DEFAULT '0',`Category` VARCHAR(45) NOT NULL,`Account` VARCHAR(45) NOT NULL,PRIMARY KEY (`idtransactions`));"""))
+                categories = ['Bars/Alcohol','Car Payment','Cash','CC Payment','CC Rewards','Coffee','Education','Fast Food','Grocieries','Insurance','Interest','Internet','Loan Payment','Medical','Misc','Paycheck','Phone','Refund/Rebate','Rent','Restaraunts','Shopping','Starting Balance','Streaming','Subscriptions','Transfer','Travel','Utilities','Taxes','Investment','Dividend','ATM','Pets']
+                for i in categories:
+                    finance_app.execute(text(f"""INSERT INTO {username}.`categories` (`Category`) VALUES ('{i}');"""))
+                finance_app.execute(text(f"""INSERT INTO {username}.`transactions` (`Date`, `Transaction`, `Amount`, `Category`, `Account`) VALUES ('2025-01-01', 'Temp', '0.00', 'Misc', 'Temp');"""))
+                finance_app.commit()
+                x = 0
+                return redirect(url_for('BalanceTracking'))
+
 def Bill(x,y):
     Bills = pd.read_sql(f'SELECT * FROM {username}.recurring_transactions;',finance_app)
     Bills = Bills.rename(columns={'Start_Date':'Next Date'})
@@ -154,67 +215,6 @@ def Categories():
     categories = categories['Category'].unique()
     categories = np.sort(categories)
     return categories
-
-@app.route('/', methods=['POST','GET'])
-def signin():
-    global username
-    username = request.form.get('User')
-    if username != None:
-        username = username.lower()
-        password = request.form.get('Password')
-        Ok = login(username,password)
-        if Ok == 'Pass':
-            global finance_app
-            engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
-            finance_app = engine.connect()
-            return redirect(url_for('BalanceTracking'))
-        elif Ok == 'Fail':
-            return render_template('LoginFail.html')
-    else:
-        return render_template('Login.html')
-
-@app.route('/Register',methods=['POST','GET'])
-def register():
-    global username
-    ph = PasswordHasher()
-    engine = create_engine("mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/users", echo=True)
-    users = engine.connect()
-    x = 1
-    username = request.form.get('User')
-    if username == None:
-        return render_template('Register.html')
-    else:
-        while x == 1:
-            user = pd.read_sql('SELECT * FROM users.users;',users)
-            if username in user:
-                return render_template('RegisterUserTaken.html')
-            else:
-                username = username.lower()
-                password = request.form.get('Password')
-                password = ph.hash(password)
-                users.execute(text('INSERT INTO `users`.`users` (`Username`, `Password`) VALUES (:Username, :Password)'),
-                         {'Username':username,'Password':password})
-                users.commit()
-                mydb = mysql.connector.connect(host='127.0.0.1',user='root',password='Printhelloworld1!')
-                mycursor = mydb.cursor()
-                mycursor.execute(f'CREATE DATABASE {username}')
-                mydb.close
-                global finance_app
-                engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
-                finance_app = engine.connect()
-                finance_app.execute(text(f"""CREATE TABLE {username}.`accounts` (`idaccounts` INT NOT NULL AUTO_INCREMENT,`Account` VARCHAR(45) NOT NULL,`Account Type` VARCHAR(45) NOT NULL,PRIMARY KEY (`idaccounts`),UNIQUE INDEX `Account_UNIQUE` (`Account` ASC) VISIBLE);"""))
-                finance_app.execute(text(f"""CREATE TABLE {username}.`categories` (`idcategories` INT NOT NULL AUTO_INCREMENT,`Category` VARCHAR(45) NOT NULL,PRIMARY KEY (`idcategories`),UNIQUE INDEX `Category_UNIQUE` (`Category` ASC) VISIBLE);"""))
-                finance_app.execute(text(f"""CREATE TABLE {username}.`investment transactions` (`idinvestment transactions` INT NOT NULL AUTO_INCREMENT,`Date` DATE NOT NULL,`Transaction` VARCHAR(45) NOT NULL,`Ticker` VARCHAR(45) NOT NULL,`Quantity` FLOAT NULL DEFAULT NULL,`Price` FLOAT NULL DEFAULT NULL,`Amount` FLOAT NOT NULL,`Account` VARCHAR(45) NOT NULL,PRIMARY KEY (`idinvestment transactions`));"""))
-                finance_app.execute(text(f"""CREATE TABLE {username}.`investment_accounts` (`idinvestment_accounts` INT NOT NULL AUTO_INCREMENT,`Account` VARCHAR(45) NOT NULL,`Account Type` VARCHAR(45) NOT NULL,PRIMARY KEY (`idinvestment_accounts`),UNIQUE INDEX `Account_UNIQUE` (`Account` ASC) VISIBLE);"""))
-                finance_app.execute(text(f"""CREATE TABLE {username}.`recurring_transactions` (`idrecurring_transactions` INT NOT NULL AUTO_INCREMENT,`Bill` VARCHAR(45) NOT NULL,`Frequency` VARCHAR(45) NOT NULL,`Start_Date` DATE NOT NULL,`Amount` FLOAT NOT NULL,`Account` VARCHAR(45) NOT NULL,PRIMARY KEY (`idrecurring_transactions`));"""))
-                finance_app.execute(text(f"""CREATE TABLE {username}.`transactions` (`idtransactions` INT NOT NULL AUTO_INCREMENT,`Date` DATE NOT NULL,`Transaction` VARCHAR(45) NOT NULL,`Amount` FLOAT NOT NULL DEFAULT '0',`Category` VARCHAR(45) NOT NULL,`Account` VARCHAR(45) NOT NULL,PRIMARY KEY (`idtransactions`));"""))
-                categories = ['Bars/Alcohol','Car Payment','Cash','CC Payment','CC Rewards','Coffee','Education','Fast Food','Grocieries','Insurance','Interest','Internet','Loan Payment','Medical','Misc','Paycheck','Phone','Refund/Rebate','Rent','Restaraunts','Shopping','Starting Balance','Streaming','Subscriptions','Transfer','Travel','Utilities','Taxes','Investment','Dividend','ATM','Pets']
-                for i in categories:
-                    finance_app.execute(text(f"""INSERT INTO {username}.`categories` (`Category`) VALUES ('{i}');"""))
-                finance_app.execute(text(f"""INSERT INTO {username}.`transactions` (`Date`, `Transaction`, `Amount`, `Category`, `Account`) VALUES ('2025-01-01', 'Temp', '0.00', 'Misc', 'Temp');"""))
-                finance_app.commit()
-                x = 0
-                return redirect(url_for('BalanceTracking'))
             
 @app.route('/BalanceTracking', methods=['POST','GET'])
 def BalanceTracking():
@@ -452,4 +452,5 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
