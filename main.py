@@ -32,7 +32,7 @@ def login(username,password):
     else:
         res = ph.hash(password)
         test = pd.read_sql('SELECT * FROM users.users;',users)
-        test = test[test['Username']==username]
+        test = test[test['Username']==session['username']]
         test = test.iat[0,2]
         try:
             ph.verify(test, password)
@@ -59,8 +59,9 @@ def trans(x,y,table):
 @app.route('/', methods=['POST','GET'])
 def signin():
     session['username'] = request.form.get('User')
+    username = session['username']
     if username != None:
-        username = session['username'].lower()
+        username = username.lower()
         password = request.form.get('Password')
         Ok = login(username,password)
         if Ok == 'Pass':
@@ -80,6 +81,7 @@ def register():
     users = engine.connect()
     x = 1
     session[username] = request.form.get('User')
+    username = session['username']
     if username == None:
         return render_template('Register.html')
     else:
@@ -116,6 +118,7 @@ def register():
                 return redirect(url_for('BalanceTracking'))
 
 def Bill(x,y):
+    username = session['username']
     Bills = pd.read_sql(f'SELECT * FROM {username}.recurring_transactions;',session['finance_app'])
     Bills = Bills.rename(columns={'Start_Date':'Next Date'})
     Bills = Bills[Bills['idrecurring_transactions']==x]
@@ -132,6 +135,7 @@ def Bill(x,y):
     return Bill
 
 def Balance_Tracking():
+    username = session['username']
     transactions = pd.read_sql('SELECT * from transactions;',session['finance_app'])
     transactions['Date'] = pd.to_datetime(transactions['Date'])
     Balances = transactions.groupby(['Account'])['Amount'].sum()
@@ -210,6 +214,7 @@ def Account():
     return account
 
 def Categories():
+    username = session['username']
     categories = pd.read_sql(f'SELECT * FROM {username}.categories;',session['finance_app'])
     categories = categories.drop(columns=['idcategories'])
     categories = categories['Category'].unique()
@@ -218,6 +223,7 @@ def Categories():
             
 @app.route('/BalanceTracking', methods=['POST','GET'])
 def BalanceTracking():
+    username = session['username']
     app.logger.debug("This is a debug message from the index route.")
     BalanceTrack = Balance_Tracking()
     account = Account()
@@ -267,6 +273,7 @@ def BalanceTracking():
 
 @app.route('/addaccount/', methods=['POST'])
 def addacct():
+    username = session['username']
     finance_app = session['finance_app']
     if request.method == 'POST':
         Account = request.form.get('Account')
@@ -282,6 +289,7 @@ def addacct():
 
 @app.route('/recurringtran/', methods=['POST'])
 def rectran():
+    username = session['username']
     finance_app = session['finance_app']
     if request.method == 'POST':
         Bill = request.form.get('Bill')
@@ -467,6 +475,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
