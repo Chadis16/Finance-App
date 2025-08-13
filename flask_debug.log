@@ -15060,3 +15060,75 @@ Traceback (most recent call last):
     transactions = pd.read_sql('SELECT * from transactions;',finance_app)
                                                              ^^^^^^^^^^^
 NameError: name 'finance_app' is not defined
+INFO:sqlalchemy.engine.Engine:SELECT DATABASE()
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT @@sql_mode
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT @@lower_case_table_names
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.Engine:DESCRIBE `users`.`SELECT * FROM users.users;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM users.users;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT DATABASE()
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT @@sql_mode
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT @@lower_case_table_names
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+DEBUG:main:This is a debug message from the index route.
+INFO:sqlalchemy.engine.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * from transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * from transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * from transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * from transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+ERROR:main:Exception on /Transactions/ [GET]
+Traceback (most recent call last):
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/main.py", line 351, in Transactions
+    table = Transact()
+            ^^^^^^^^^^
+  File "/home/ubuntu/financeapp/main.py", line 191, in Transact
+    transactions = pd.read_sql('SELECT * from transactions;',finance_app)
+                                                             ^^^^^^^^^^^
+NameError: name 'finance_app' is not defined
