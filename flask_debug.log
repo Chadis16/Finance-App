@@ -21476,3 +21476,211 @@ Traceback (most recent call last):
     print(username)
           ^^^^^^^^
 NameError: name 'username' is not defined
+INFO:sqlalchemy.engine.Engine:SELECT DATABASE()
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT @@sql_mode
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT @@lower_case_table_names
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.Engine:DESCRIBE `users`.`SELECT * FROM users.users;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM users.users;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT DATABASE()
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT @@sql_mode
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT @@lower_case_table_names
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+DEBUG:main:This is a debug message from the index route.
+INFO:sqlalchemy.engine.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * from transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * from transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * from transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * from transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * from transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * from transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * from transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * from transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.categories;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.categories;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * from transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * from transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+DEBUG:main:This is a debug message from the index route.
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * from transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * from transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * from transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * from transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO chadmoore.`accounts` (`Account`, `Account Type`) VALUES (%(Account)s, %(AccountType)s)
+INFO:sqlalchemy.engine.Engine:[generated in 0.00051s] {'Account': 'Citi Rewards', 'AccountType': 'Credit Card'}
+INFO:sqlalchemy.engine.Engine:INSERT INTO chadmoore.`transactions` (`Date`, `Transaction`, `Amount`, `Category`, `Account`) VALUES (%(Date)s, 'Starting Balance', %(Amount)s, 'Starting Balance', %(Account)s);
+INFO:sqlalchemy.engine.Engine:[generated in 0.00027s] {'Date': '2025-01-01', 'Amount': '0.00', 'Account': 'Citi Rewards'}
+INFO:sqlalchemy.engine.Engine:COMMIT
+DEBUG:main:This is a debug message from the index route.
+INFO:sqlalchemy.engine.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * from transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * from transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * from transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * from transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO chadmoore.`accounts` (`Account`, `Account Type`) VALUES (%(Account)s, %(AccountType)s)
+INFO:sqlalchemy.engine.Engine:[cached since 27.54s ago] {'Account': 'Discover', 'AccountType': 'Credit Card'}
+INFO:sqlalchemy.engine.Engine:INSERT INTO chadmoore.`transactions` (`Date`, `Transaction`, `Amount`, `Category`, `Account`) VALUES (%(Date)s, 'Starting Balance', %(Amount)s, 'Starting Balance', %(Account)s);
+INFO:sqlalchemy.engine.Engine:[cached since 27.54s ago] {'Date': '2025-01-01', 'Amount': '-6800.69', 'Account': 'Discover'}
+INFO:sqlalchemy.engine.Engine:COMMIT
+DEBUG:main:This is a debug message from the index route.
+INFO:sqlalchemy.engine.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * from transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * from transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * from transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * from transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:DESCRIBE `chadmoore`.`SELECT * FROM chadmoore.recurring_transactions;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM chadmoore.recurring_transactions;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+ERROR:main:Exception on /addaccount/ [POST]
+Traceback (most recent call last):
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/main.py", line 279, in addacct
+    finance_app.execute(text(f'INSERT INTO {username}.`accounts` (`Account`, `Account Type`) VALUES (:Account, :AccountType)'),
+    ^^^^^^^^^^^
+NameError: name 'finance_app' is not defined
