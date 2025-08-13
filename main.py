@@ -3,7 +3,7 @@ from Investment_Transactions import investment_transactions
 import plotly.express as px
 import plotly.graph_objects as go
 import mysql.connector
-#import yfinance as yf
+import yfinance as yf
 import pandas as pd
 import datetime
 from datetime import date, timedelta
@@ -452,3 +452,4 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
