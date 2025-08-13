@@ -22064,3 +22064,183 @@ Traceback (most recent call last):
     if username != None:
        ^^^^^^^^
 UnboundLocalError: cannot access local variable 'username' where it is not associated with a value
+ERROR:main:Exception on / [GET]
+Traceback (most recent call last):
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/main.py", line 62, in signin
+    if username != None:
+       ^^^^^^^^
+UnboundLocalError: cannot access local variable 'username' where it is not associated with a value
+INFO:sqlalchemy.engine.Engine:SELECT DATABASE()
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT @@sql_mode
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT @@lower_case_table_names
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.Engine:DESCRIBE `users`.`SELECT * FROM users.users;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM users.users;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT DATABASE()
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT @@sql_mode
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT @@lower_case_table_names
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.Engine:DESCRIBE `users`.`SELECT * FROM users.users;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM users.users;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT DATABASE()
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT @@sql_mode
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT @@lower_case_table_names
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+ERROR:main:Exception on / [POST]
+Traceback (most recent call last):
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 920, in full_dispatch_request
+    return self.finalize_request(rv)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 941, in finalize_request
+    response = self.process_response(response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 1322, in process_response
+    self.session_interface.save_session(self, ctx.session, response)
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/sessions.py", line 387, in save_session
+    val = self.get_signing_serializer(app).dumps(dict(session))  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/itsdangerous/serializer.py", line 316, in dumps
+    payload = want_bytes(self.dump_payload(obj))
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/itsdangerous/url_safe.py", line 56, in dump_payload
+    json = super().dump_payload(obj)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/itsdangerous/serializer.py", line 278, in dump_payload
+    return want_bytes(self.serializer.dumps(obj, **self.serializer_kwargs))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/json/tag.py", line 323, in dumps
+    return dumps(self.tag(value), separators=(",", ":"))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/json/__init__.py", line 41, in dumps
+    return current_app.json.dumps(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/json/provider.py", line 179, in dumps
+    return json.dumps(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/json/provider.py", line 121, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Connection is not JSON serializable
+ERROR:main:Request finalizing failed with an error while handling an error
+Traceback (most recent call last):
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 920, in full_dispatch_request
+    return self.finalize_request(rv)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 941, in finalize_request
+    response = self.process_response(response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 1322, in process_response
+    self.session_interface.save_session(self, ctx.session, response)
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/sessions.py", line 387, in save_session
+    val = self.get_signing_serializer(app).dumps(dict(session))  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/itsdangerous/serializer.py", line 316, in dumps
+    payload = want_bytes(self.dump_payload(obj))
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/itsdangerous/url_safe.py", line 56, in dump_payload
+    json = super().dump_payload(obj)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/itsdangerous/serializer.py", line 278, in dump_payload
+    return want_bytes(self.serializer.dumps(obj, **self.serializer_kwargs))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/json/tag.py", line 323, in dumps
+    return dumps(self.tag(value), separators=(",", ":"))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/json/__init__.py", line 41, in dumps
+    return current_app.json.dumps(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/json/provider.py", line 179, in dumps
+    return json.dumps(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/json/provider.py", line 121, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Connection is not JSON serializable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 941, in finalize_request
+    response = self.process_response(response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 1322, in process_response
+    self.session_interface.save_session(self, ctx.session, response)
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/sessions.py", line 387, in save_session
+    val = self.get_signing_serializer(app).dumps(dict(session))  # type: ignore[union-attr]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/itsdangerous/serializer.py", line 316, in dumps
+    payload = want_bytes(self.dump_payload(obj))
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/itsdangerous/url_safe.py", line 56, in dump_payload
+    json = super().dump_payload(obj)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/itsdangerous/serializer.py", line 278, in dump_payload
+    return want_bytes(self.serializer.dumps(obj, **self.serializer_kwargs))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/json/tag.py", line 323, in dumps
+    return dumps(self.tag(value), separators=(",", ":"))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/json/__init__.py", line 41, in dumps
+    return current_app.json.dumps(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/json/provider.py", line 179, in dumps
+    return json.dumps(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/json/provider.py", line 121, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Connection is not JSON serializable
