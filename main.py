@@ -57,7 +57,6 @@ def trans(x,y,table):
 @app.route('/', methods=['POST','GET'])
 def signin():
     global username
-    global finance_app
     username = request.form.get('User')
     if username != None:
         username = username.lower()
@@ -66,6 +65,7 @@ def signin():
         if Ok == 'Pass':
             engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
             finance_app = engine.connect()
+            global finance_app
             return redirect(url_for('BalanceTracking'))
         elif Ok == 'Fail':
             return render_template('LoginFail.html')
@@ -75,7 +75,6 @@ def signin():
 @app.route('/Register',methods=['POST','GET'])
 def register():
     global username
-    global finance_app
     ph = PasswordHasher()
     engine = create_engine("mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/users", echo=True)
     users = engine.connect()
@@ -101,6 +100,7 @@ def register():
                 mydb.close
                 engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
                 finance_app = engine.connect()
+                global finance_app
                 finance_app.execute(text(f"""CREATE TABLE {username}.`accounts` (`idaccounts` INT NOT NULL AUTO_INCREMENT,`Account` VARCHAR(45) NOT NULL,`Account Type` VARCHAR(45) NOT NULL,PRIMARY KEY (`idaccounts`),UNIQUE INDEX `Account_UNIQUE` (`Account` ASC) VISIBLE);"""))
                 finance_app.execute(text(f"""CREATE TABLE {username}.`categories` (`idcategories` INT NOT NULL AUTO_INCREMENT,`Category` VARCHAR(45) NOT NULL,PRIMARY KEY (`idcategories`),UNIQUE INDEX `Category_UNIQUE` (`Category` ASC) VISIBLE);"""))
                 finance_app.execute(text(f"""CREATE TABLE {username}.`investment transactions` (`idinvestment transactions` INT NOT NULL AUTO_INCREMENT,`Date` DATE NOT NULL,`Transaction` VARCHAR(45) NOT NULL,`Ticker` VARCHAR(45) NOT NULL,`Quantity` FLOAT NULL DEFAULT NULL,`Price` FLOAT NULL DEFAULT NULL,`Amount` FLOAT NOT NULL,`Account` VARCHAR(45) NOT NULL,PRIMARY KEY (`idinvestment transactions`));"""))
@@ -457,6 +457,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
