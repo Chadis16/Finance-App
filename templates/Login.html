@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Finance App</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='site.css')}}"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body style="display: flex;justify-content: center;align-items: center;">
+        <div class="main" style= "background-color: rgba(239,245,247,0.75); border-radius: 10px;">
+            <h1>Enter your login credentials</h1>
+            <form method="POST">
+                <label for="User">User:</label>
+                <input type="text" id="User" name="User" placeholder="Enter your username" required style="margin-left: 31px;">
+                <br>
+                <label for="Password">Password:</label>
+                <input type="password" id="Password" name="Password" placeholder="Enter your password" required>
+                <div class="wrap">
+                    <button type="submit">Login</button>
+                </div>
+            </form>
+            <p>Not registered?
+                <a href="Register" style="text-decoration: none;">Create an account</a>
+            </p>
+        </div>
+    </body>
+</html>
