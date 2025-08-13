@@ -22046,3 +22046,21 @@ Traceback (most recent call last):
   File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/sessions.py", line 104, in _fail
     raise RuntimeError(
 RuntimeError: The session is unavailable because no secret key was set.  Set the secret_key on the application to something unique and secret.
+ERROR:main:Exception on / [GET]
+Traceback (most recent call last):
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/main.py", line 62, in signin
+    if username != None:
+       ^^^^^^^^
+UnboundLocalError: cannot access local variable 'username' where it is not associated with a value
