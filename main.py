@@ -1,4 +1,4 @@
-from flask import render_template, Flask, request, url_for, flash, redirect
+from flask import render_template, Flask, request, url_for, flash, redirect, session
 from Investment_Transactions import investment_transactions
 import plotly.express as px
 import plotly.graph_objects as go
@@ -56,16 +56,14 @@ def trans(x,y,table):
 
 @app.route('/', methods=['POST','GET'])
 def signin():
-    global username
-    global finance_app
-    username = request.form.get('User')
+    session['username'] = request.form.get('User')
     if username != None:
-        username = username.lower()
+        username = session['username'].lower()
         password = request.form.get('Password')
         Ok = login(username,password)
         if Ok == 'Pass':
             engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
-            finance_app = engine.connect()
+            session['finance_app'] = engine.connect()
             return redirect(url_for('BalanceTracking'))
         elif Ok == 'Fail':
             return render_template('LoginFail.html')
@@ -75,12 +73,11 @@ def signin():
 @app.route('/Register',methods=['POST','GET'])
 def register():
     global username
-    global finance_app
     ph = PasswordHasher()
     engine = create_engine("mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/users", echo=True)
     users = engine.connect()
     x = 1
-    username = request.form.get('User')
+    session[username] = request.form.get('User')
     if username == None:
         return render_template('Register.html')
     else:
@@ -100,7 +97,8 @@ def register():
                 mycursor.execute(f'CREATE DATABASE {username}')
                 mydb.close
                 engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
-                finance_app = engine.connect()
+                session['finance_app'] = engine.connect()
+                finance_app = session['finance_app']
                 finance_app.execute(text(f"""CREATE TABLE {username}.`accounts` (`idaccounts` INT NOT NULL AUTO_INCREMENT,`Account` VARCHAR(45) NOT NULL,`Account Type` VARCHAR(45) NOT NULL,PRIMARY KEY (`idaccounts`),UNIQUE INDEX `Account_UNIQUE` (`Account` ASC) VISIBLE);"""))
                 finance_app.execute(text(f"""CREATE TABLE {username}.`categories` (`idcategories` INT NOT NULL AUTO_INCREMENT,`Category` VARCHAR(45) NOT NULL,PRIMARY KEY (`idcategories`),UNIQUE INDEX `Category_UNIQUE` (`Category` ASC) VISIBLE);"""))
                 finance_app.execute(text(f"""CREATE TABLE {username}.`investment transactions` (`idinvestment transactions` INT NOT NULL AUTO_INCREMENT,`Date` DATE NOT NULL,`Transaction` VARCHAR(45) NOT NULL,`Ticker` VARCHAR(45) NOT NULL,`Quantity` FLOAT NULL DEFAULT NULL,`Price` FLOAT NULL DEFAULT NULL,`Amount` FLOAT NOT NULL,`Account` VARCHAR(45) NOT NULL,PRIMARY KEY (`idinvestment transactions`));"""))
@@ -116,9 +114,7 @@ def register():
                 return redirect(url_for('BalanceTracking'))
 
 def Bill(x,y):
-    global finance_app
-    finance_app = finance_app
-    Bills = pd.read_sql(f'SELECT * FROM {username}.recurring_transactions;',finance_app)
+    Bills = pd.read_sql(f'SELECT * FROM {username}.recurring_transactions;',session['finance_app'])
     Bills = Bills.rename(columns={'Start_Date':'Next Date'})
     Bills = Bills[Bills['idrecurring_transactions']==x]
     if y == 'Bill':
@@ -134,9 +130,7 @@ def Bill(x,y):
     return Bill
 
 def Balance_Tracking():
-    global finance_app
-    finance_app = finance_app
-    transactions = pd.read_sql('SELECT * from transactions;',finance_app)
+    transactions = pd.read_sql('SELECT * from transactions;',session['finance_app'])
     transactions['Date'] = pd.to_datetime(transactions['Date'])
     Balances = transactions.groupby(['Account'])['Amount'].sum()
     Balances = Balances.to_frame()
@@ -151,7 +145,7 @@ def Balance_Tracking():
     BalanceTracking = pd.DataFrame(columns=['Date','Transaction','Amount','Balance','Account'])
     for i in accts:
         account = i
-        Bills = pd.read_sql(f'SELECT * FROM {username}.recurring_transactions;',finance_app)
+        Bills = pd.read_sql(f'SELECT * FROM {username}.recurring_transactions;',session['finance_app'])
         Bills = Bills.drop(columns=['idrecurring_transactions'])
         Bills = Bills[Bills['Account']==account]
         df = Balances[Balances['Account']==account]
@@ -192,9 +186,7 @@ def Balance_Tracking():
     return BalanceTrack
 
 def Transact():
-    global finance_app
-    finance_app = finance_app
-    transactions = pd.read_sql('SELECT * from transactions;',finance_app)
+    transactions = pd.read_sql('SELECT * from transactions;',session['finance_app'])
     transaction = transactions
     return transaction
 
@@ -208,9 +200,7 @@ def Balances():
     return balance
 
 def Account():
-    global finance_app
-    finance_app = finance_app
-    transactions = pd.read_sql('SELECT * from transactions;',finance_app)
+    transactions = pd.read_sql('SELECT * from transactions;',session['finance_app'])
     transactions['Date'] = pd.to_datetime(transactions['Date'])
     account = transactions['Account'].unique()
     account = np.sort(account)
@@ -218,9 +208,7 @@ def Account():
     return account
 
 def Categories():
-    global finance_app
-    finance_app = finance_app
-    categories = pd.read_sql(f'SELECT * FROM {username}.categories;',finance_app)
+    categories = pd.read_sql(f'SELECT * FROM {username}.categories;',session['finance_app'])
     categories = categories.drop(columns=['idcategories'])
     categories = categories['Category'].unique()
     categories = np.sort(categories)
@@ -228,14 +216,10 @@ def Categories():
             
 @app.route('/BalanceTracking', methods=['POST','GET'])
 def BalanceTracking():
-    global finance_app
-    global username
-    finance_app = finance_app
-    username = username
     app.logger.debug("This is a debug message from the index route.")
     BalanceTrack = Balance_Tracking()
     account = Account()
-    Bills = pd.read_sql(f'SELECT * FROM {username}.recurring_transactions;',finance_app)
+    Bills = pd.read_sql(f'SELECT * FROM {username}.recurring_transactions;',session['finance_app'])
     Bills = Bills.rename(columns={'Start_Date':'Next Date'})
     Bills['Amount'] =  Bills['Amount'].apply(lambda x: f"${x:,.2f}")
     recacct = Bills['Account'].unique()
@@ -281,8 +265,7 @@ def BalanceTracking():
 
 @app.route('/addaccount/', methods=['POST'])
 def addacct():
-    global finance_app
-    finance_app = finance_app
+    finance_app = session['finance_app']
     if request.method == 'POST':
         Account = request.form.get('Account')
         AccountType = request.form.get('AccountType')
@@ -297,8 +280,7 @@ def addacct():
 
 @app.route('/recurringtran/', methods=['POST'])
 def rectran():
-    global finance_app
-    finance_app = finance_app
+    finance_app = session['finance_app']
     if request.method == 'POST':
         Bill = request.form.get('Bill')
         Frequency = request.form.get('Frequency')
@@ -312,8 +294,7 @@ def rectran():
 
 @app.route('/recurringtrandel/', methods=['POST'])
 def rectrandel():
-    global finance_app
-    finance_app = finance_app
+    finance_app = session['finance_app']
     if request.method == 'POST':
         Bill = request.form.get('ID')
         finance_app.execute(text(f"DELETE FROM {username}.`recurring_transactions` WHERE (`idrecurring transactions` = :Bill)"),{'Bill':Bill})
@@ -484,6 +465,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
