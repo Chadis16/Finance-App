@@ -15,13 +15,13 @@ from sqlalchemy import create_engine, insert, MetaData, Table, Column, Integer, 
 from argon2 import PasswordHasher
 import logging
 
-app.secret_key = 'BAD_SECRET_KEY'
-
 logging.basicConfig(filename='flask_debug.log', level=logging.DEBUG)
 
 metadata = MetaData()
 
 app = Flask(__name__)
+
+app.secret_key = 'BAD_SECRET_KEY'
 
 def login(username,password):
     engine = create_engine("mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/users", echo=True)
@@ -467,6 +467,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
