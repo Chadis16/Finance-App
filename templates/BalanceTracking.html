@@ -1,0 +1,156 @@
+{% extends "layout.html" %}
+{% block title %}
+Balance Tracking
+{% endblock %}
+{% block content %}
+<div id="popup1" class="popup">
+    <div class="popup-content">
+        <h2>Recurring Transaction</h2>
+        <form method="POST" action="/recurringtran/">
+            <label class="form-label" for="Bill">Bill</label>
+            <input class="form-input" type="text" placeholder="Enter Bill" id="Bill" name="Bill" required>
+            <br>
+            <label class="form-label" for="Frequency">Frequency</label>
+            <select name="Frequency" id="Frequency">
+                <option value="One Time">One Time</option>
+                <option value="Daily">Daily</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Bi Weekly">Bi Weekly</option>
+                <option value="Monthly">Monthly</option>
+                <option value="Anually">Anually</option>
+            </select>
+            <br>
+            <label class="form-label" for="Date">Next Date</label>
+            <input class="form-input" type="date" id="Date" name="Date" required>
+            <br>
+            <label class="form-label" for="Amount">Amount</label>
+            <input class="form-input" type="number" id="Amount" name="Amount" step="0.01" required>
+            <br>
+            <label class="form-label" for="Account">Account</label>
+            <select name="Account" id="Account">
+                {% for allacct in allacct %}
+                <option value="{{ allacct }}">{{ allacct }}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+        <button onclick="closepopup()" style="margin-top: 10px; padding:5px 10px; background-color: #dc3545; color: #fff; border: none; border-radius: 3px;">Close</button>
+    </div>
+</div>
+<div id="popup2" class="popup">
+    <div class="popup-content">
+        <h2>Recurring Transaction</h2>
+        <form method="POST" action="/recurringtranedit/">
+            <input type="hidden" id="ID" name="ID">
+            <label class="form-label" for="Bill1">Bill</label>
+            <input class="form-input" type="text" id="Bill1" name="Bill" required>
+            <br>
+            <label class="form-label" for="Frequency1">Frequency</label>
+            <select name="Frequency" id="Frequency1">
+                <option value="One Time">One Time</option>
+                <option value="Daily">Daily</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Bi Weekly">Bi Weekly</option>
+                <option value="Monthly">Monthly</option>
+                <option value="Anually">Anually</option>
+            </select>
+            <br>
+            <label class="form-label" for="Date1">Next Date</label>
+            <input class="form-input" type="date" id="Date1" name="Date" required>
+            <br>
+            <label class="form-label" for="Amount1">Amount</label>
+            <input class="form-input" type="number" id="Amount1" name="Amount" step="0.01" required>
+            <br>
+            <label class="form-label" for="Account1">Account</label>
+            <select name="Account" id="Account1">
+                {% for allacct in allacct %}
+                <option value="{{ allacct }}">{{ allacct }}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+        <button onclick="closepopup()" style="margin-top: 10px; padding:5px 10px; background-color: #dc3545; color: #fff; border: none; border-radius: 3px;">Close</button>
+    </div>
+</div>
+<div id="popup3" class="popup">
+    <div class="popup-content">
+        <h2>Account</h2>
+        <form method="POST" action="/addaccount/">
+            <label class="form-label" for="Account">Account</label>
+            <input class="form-input" type="text" id="Account" name="Account" required>
+            <br>
+            <label class="form-label" for="AccountType">Account Type</label>
+            <select name="AccountType" id="AccountType">
+                <option value="Checking">Checking</option>
+                <option value="Savings">Savings</option>
+                <option value="Asset">Asset</option>
+                <option value="Car Loan">Car Loan</option>
+                <option value="Personal Loan">Personal Loan</option>
+                <option value="Credit Card">Credit Card</option>
+                <option value="Student Loan">Student Loan</option>
+            </select>
+            <br>
+            <label class="form-label" for="OpenDate">Open Date</label>
+            <input class="form-input" type="date" id="OpenDate" name="OpenDate" required>
+            <br>
+            <label class="form-label" for="StartingBalance">Starting Balance</label>
+            <input class="form-input" type="number" id="StartingBalance" name="StartingBalance" step="0.01" required>
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+        <button onclick="closepopup()" style="margin-top: 10px; padding:5px 10px; background-color: #dc3545; color: #fff; border: none; border-radius: 3px;">Close</button>
+    </div>
+</div>
+<div class="row">
+    <div class="column">
+        <button onclick="addrecurring()" style="padding: 10px 20px; background-color: #28a745; color: #fff; border: none; border-radius: 5px;">Add Recurring Transaction</button>
+        <button onclick="addaccount()" style="padding: 10px 20px; background-color: #28a745; color: #fff; border: none; border-radius: 5px;">Add Account</button>
+        {{ Bills | safe}}
+    </div>
+    <div class="column">
+        <form method="POST">
+            <label for="Account">Choose Account:</label>
+            <select name="Account" id="Account" onchange="this.form.submit()">
+                <option value="{{ acct }}">{{ acct }}</option>
+                {% for account in account %}
+                <option value="{{ account }}">{{ account }}</option>
+                {% endfor %}
+            </select>
+            <label for="Timeframe">Time Frame</label>
+            <select name="Timeframe" id="Timeframe" onchange="this.form.submit()">
+                <option value="{{ timeframe }}">{{ timeframe }}</option>
+                <option value="Month">Month</option>
+                <option value="3 Months">3 Months</option>
+                <option value="6 Month">6 Months</option>
+                <option value="Year">Year</option>
+            </select>
+        </form>
+        {{ graph_json | safe }}
+    </div>
+</div>
+{{ Tracking | safe}}
+<script type="text/javascript">
+    function addrecurring() {
+        document.getElementById('popup1').style.display = 'flex';
+    }
+    function addaccount() {
+        document.getElementById('popup3').style.display = 'flex';
+    }
+    function editrecurring(ID,Bill,Frequency,Date,Amount,Account) {
+        document.getElementById('ID').value = ID;
+        document.getElementById('Bill1').value = Bill;
+        document.getElementById('Frequency1').value = Frequency;
+        document.getElementById('Date1').value = Date;
+        document.getElementById('Amount1').value = Amount;
+        document.getElementById('Account1').value = Account;
+        document.getElementById('popup2').style.display = 'flex';
+    }
+    function closepopup() {
+        document.getElementById('popup1').style.display = 'none'
+        document.getElementById('popup2').style.display = 'none'
+        document.getElementById('popup3').style.display = 'none'
+    }
+</script>
+{% endblock %}

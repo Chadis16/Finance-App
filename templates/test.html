@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pass JS Variable to Form</title>
+    </head>
+    <body>
+        <form>
+            <label for="myInput">Value from javascript:</label>
+            <input type="text" id="myInput" name="myInput">
+        </form>
+        <script>
+            let jsVariable = "Hello from JS!";
+            const inputElement = document.getElementById("myInput");
+            inputElement.value = jsVariable
+        </script>
+    </body>
+</html>
