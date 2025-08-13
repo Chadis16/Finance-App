@@ -15,6 +15,8 @@ from sqlalchemy import create_engine, insert, MetaData, Table, Column, Integer, 
 from argon2 import PasswordHasher
 import logging
 
+app.secret_key = 'BAD_SECRET_KEY'
+
 logging.basicConfig(filename='flask_debug.log', level=logging.DEBUG)
 
 metadata = MetaData()
@@ -465,6 +467,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
