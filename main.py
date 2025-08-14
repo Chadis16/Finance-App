@@ -59,7 +59,6 @@ def trans(x,y,table):
 
 @app.route('/', methods=['POST','GET'])
 def signin():
-    global finance_app
     session['username'] = request.form.get('User')
     username = session['username']
     if username != None:
@@ -75,7 +74,6 @@ def signin():
 
 @app.route('/Register',methods=['POST','GET'])
 def register():
-    global finance_app
     ph = PasswordHasher()
     engine = create_engine("mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/users", echo=True)
     users = engine.connect()
@@ -113,6 +111,8 @@ def register():
                     finance_app.execute(text(f"""INSERT INTO {username}.`categories` (`Category`) VALUES ('{i}');"""))
                 finance_app.execute(text(f"""INSERT INTO {username}.`transactions` (`Date`, `Transaction`, `Amount`, `Category`, `Account`) VALUES ('2025-01-01', 'Temp', '0.00', 'Misc', 'Temp');"""))
                 finance_app.commit()
+                users.close()
+                finance_app.close()
                 x = 0
                 return redirect(url_for('BalanceTracking'))
 
@@ -133,6 +133,7 @@ def Bill(x,y):
         Bill = Bills.iat[0,4]
     elif y == 'Account':
         Bill = Bills.iat[0,5]
+    finance_app.close()
     return Bill
 
 def Balance_Tracking():
@@ -192,6 +193,7 @@ def Balance_Tracking():
     BalanceTrack = BalanceTracking
     BalanceTrack['Amount'] = BalanceTrack['Amount'].apply(lambda x: f"${x:,.2f}")
     BalanceTrack['Balance'] = BalanceTrack['Balance'].apply(lambda x: f"${x:,.2f}")
+    finance_app.close()
     return BalanceTrack
 
 def Transact():
@@ -200,6 +202,7 @@ def Transact():
     finance_app = engine.connect()
     transactions = pd.read_sql('SELECT * from transactions;',finance_app)
     transaction = transactions
+    finance_app.close()
     return transaction
 
 def Balances():
@@ -220,6 +223,7 @@ def Account():
     account = transactions['Account'].unique()
     account = np.sort(account)
     account = np.insert(account, 0, 'All')
+    finance_app.close()
     return account
 
 def Categories():
@@ -230,6 +234,7 @@ def Categories():
     categories = categories.drop(columns=['idcategories'])
     categories = categories['Category'].unique()
     categories = np.sort(categories)
+    finance_app.close()
     return categories
             
 @app.route('/BalanceTracking', methods=['POST','GET'])
@@ -282,6 +287,7 @@ def BalanceTracking():
     table2 = table2.dropna()
     table2 = table2[table2['Transaction']!='Daily']
     table2 = table2.to_html(classes='table table-stripped',escape=False,index=False,table_id='Tracking').replace('<td>', '<td align="right">')
+    finance_app.close()
     return render_template('BalanceTracking.html', Bills = table1, Tracking = table2, acct = acct, account = recacct, graph_json = graph, allacct = account, timeframe = timeframe)
 
 @app.route('/addaccount/', methods=['POST'])
@@ -404,6 +410,7 @@ def Transactions():
     else:
         table = table[table['Account']==request.form.get('Account')]
         table = table.to_html(escape=False,index=False,table_id='transactions table').replace('<td>', '<td align="right">')
+    finance_app.close()
     return render_template('Transactions.html',account = account, table = table, acct = acct, categories = categories,balance = balance)
 
 @app.route('/trandel/', methods=['POST'])
@@ -505,6 +512,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
