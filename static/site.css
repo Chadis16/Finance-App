@@ -79,10 +79,6 @@ html {
     text-align: right;
 }
 
-table .btn{
-    vertical-align: top;
-}
-
 th {
     border: 1px solid #ddd;
     padding: 5px;
@@ -98,6 +94,19 @@ tr:nth-child(even) {
 tr:nth-child(odd) {
     background-color: rgb(221, 243, 236);
 }
+
+td:nth-child(6) {
+    text-align: center;
+}
+
+td:nth-child(7) {
+    text-align: center;
+}
+
+td:nth-child(8) {
+    text-align: center;
+}
+
 
 .popup {
     display: none;
