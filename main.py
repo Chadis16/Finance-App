@@ -263,6 +263,7 @@ def BalanceTracking():
     table1['Mark Paid'] = table1['idrecurring_transactions'].apply(lambda x: f'<form action="/recurringtranpaid/" method="POST"><input type="hidden" name="ID" value="{x}"><button type="submit">Mark Paid</button></form>')
     table1 = table1.sort_values(by=['Next Date'])
     table1 = table1.drop(columns=['idrecurring_transactions'])
+    
     table1 = table1.to_html(classes='table table-stripped',escape=False,index=False,table_id='Bills Table')
     table2 = BalanceTrack
     if acct == 'All':
