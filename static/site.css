@@ -93,7 +93,7 @@ table thead tr:last-child th:last-child {
 }
 
 th {
-    border: 1px solid #ddd;
+    border: none;
     padding: 5px;
     text-align: center;
     width: fit-content;
