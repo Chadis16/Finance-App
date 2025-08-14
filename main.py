@@ -407,10 +407,10 @@ def Transactions():
     table = table.drop(columns=['idtransactions'])
     table = table.sort_values(by=['Date'],ascending=False)
     if acct == 'All':
-        table = table.to_html(classes='table table-stripped',escape=False,index=False,,table_id='transactions table')
+        table = table.to_html(classes='table table-stripped',escape=False,index=False,table_id='transactions table')
     else:
         table = table[table['Account']==request.form.get('Account')]
-        table = table.to_html(classes='table table-stripped',escape=False,index=False,,table_id='transactions table')
+        table = table.to_html(classes='table table-stripped',escape=False,index=False,table_id='transactions table')
     return render_template('Transactions.html',account = account, table = table, acct = acct, categories = categories,balance = balance)
 
 @app.route('/trandel/', methods=['POST'])
