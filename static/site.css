@@ -92,7 +92,7 @@ tr:nth-child(even) {
 }
 
 tr:nth-child(odd) {
-    background-color: aqua;
+    background-color: rgb(204, 240, 240);
 }
 
 .popup {
