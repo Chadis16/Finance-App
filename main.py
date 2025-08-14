@@ -347,7 +347,7 @@ def rectranpaid():
         Bills['Amount'] =  Bills['Amount'].apply(lambda x: f"${x:,.2f}")
         Bills['Next Date'] = pd.to_datetime(Bills['Next Date'])
         ID = int(request.form.get('ID'))
-        Bills = Bills[Bills['idrecurring transactions']==ID]
+        Bills = Bills[Bills['idrecurring_transactions']==ID]
         Bill = Bills.iat[0,1]
         Frequency = Bills.iat[0,2]
         StartDate = Bills.iat[0,3]
@@ -511,6 +511,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
