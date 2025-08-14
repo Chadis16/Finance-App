@@ -66,7 +66,7 @@ def signin():
         Ok = login(username,password)
         if Ok == 'Pass':
             engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
-            session['finance_app'] = engine.connect()
+            finance_app = engine.connect()
             return redirect(url_for('BalanceTracking'))
         elif Ok == 'Fail':
             return render_template('LoginFail.html')
@@ -101,8 +101,7 @@ def register():
                 mycursor.execute(f'CREATE DATABASE {username}')
                 mydb.close
                 engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
-                session['finance_app'] = engine.connect()
-                finance_app = session['finance_app']
+                finance_app = engine.connect()
                 finance_app.execute(text(f"""CREATE TABLE {username}.`accounts` (`idaccounts` INT NOT NULL AUTO_INCREMENT,`Account` VARCHAR(45) NOT NULL,`Account Type` VARCHAR(45) NOT NULL,PRIMARY KEY (`idaccounts`),UNIQUE INDEX `Account_UNIQUE` (`Account` ASC) VISIBLE);"""))
                 finance_app.execute(text(f"""CREATE TABLE {username}.`categories` (`idcategories` INT NOT NULL AUTO_INCREMENT,`Category` VARCHAR(45) NOT NULL,PRIMARY KEY (`idcategories`),UNIQUE INDEX `Category_UNIQUE` (`Category` ASC) VISIBLE);"""))
                 finance_app.execute(text(f"""CREATE TABLE {username}.`investment transactions` (`idinvestment transactions` INT NOT NULL AUTO_INCREMENT,`Date` DATE NOT NULL,`Transaction` VARCHAR(45) NOT NULL,`Ticker` VARCHAR(45) NOT NULL,`Quantity` FLOAT NULL DEFAULT NULL,`Price` FLOAT NULL DEFAULT NULL,`Amount` FLOAT NOT NULL,`Account` VARCHAR(45) NOT NULL,PRIMARY KEY (`idinvestment transactions`));"""))
@@ -119,7 +118,9 @@ def register():
 
 def Bill(x,y):
     username = session['username']
-    Bills = pd.read_sql(f'SELECT * FROM {username}.recurring_transactions;',session['finance_app'])
+    engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
+    finance_app = engine.connect()
+    Bills = pd.read_sql(f'SELECT * FROM {username}.recurring_transactions;',finance_app)
     Bills = Bills.rename(columns={'Start_Date':'Next Date'})
     Bills = Bills[Bills['idrecurring_transactions']==x]
     if y == 'Bill':
@@ -136,7 +137,9 @@ def Bill(x,y):
 
 def Balance_Tracking():
     username = session['username']
-    transactions = pd.read_sql('SELECT * from transactions;',session['finance_app'])
+    engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
+    finance_app = engine.connect()
+    transactions = pd.read_sql('SELECT * from transactions;',finance_app)
     transactions['Date'] = pd.to_datetime(transactions['Date'])
     Balances = transactions.groupby(['Account'])['Amount'].sum()
     Balances = Balances.to_frame()
@@ -151,7 +154,7 @@ def Balance_Tracking():
     BalanceTracking = pd.DataFrame(columns=['Date','Transaction','Amount','Balance','Account'])
     for i in accts:
         account = i
-        Bills = pd.read_sql(f'SELECT * FROM {username}.recurring_transactions;',session['finance_app'])
+        Bills = pd.read_sql(f'SELECT * FROM {username}.recurring_transactions;',finance_app)
         Bills = Bills.drop(columns=['idrecurring_transactions'])
         Bills = Bills[Bills['Account']==account]
         df = Balances[Balances['Account']==account]
@@ -192,7 +195,9 @@ def Balance_Tracking():
     return BalanceTrack
 
 def Transact():
-    transactions = pd.read_sql('SELECT * from transactions;',session['finance_app'])
+    engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
+    finance_app = engine.connect()
+    transactions = pd.read_sql('SELECT * from transactions;',finance_app)
     transaction = transactions
     return transaction
 
@@ -206,7 +211,9 @@ def Balances():
     return balance
 
 def Account():
-    transactions = pd.read_sql('SELECT * from transactions;',session['finance_app'])
+    engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
+    finance_app = engine.connect()
+    transactions = pd.read_sql('SELECT * from transactions;',finance_app)
     transactions['Date'] = pd.to_datetime(transactions['Date'])
     account = transactions['Account'].unique()
     account = np.sort(account)
@@ -215,7 +222,9 @@ def Account():
 
 def Categories():
     username = session['username']
-    categories = pd.read_sql(f'SELECT * FROM {username}.categories;',session['finance_app'])
+    engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
+    finance_app = engine.connect()
+    categories = pd.read_sql(f'SELECT * FROM {username}.categories;',finance_app)
     categories = categories.drop(columns=['idcategories'])
     categories = categories['Category'].unique()
     categories = np.sort(categories)
@@ -224,10 +233,12 @@ def Categories():
 @app.route('/BalanceTracking', methods=['POST','GET'])
 def BalanceTracking():
     username = session['username']
+    engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
+    finance_app = engine.connect()
     app.logger.debug("This is a debug message from the index route.")
     BalanceTrack = Balance_Tracking()
     account = Account()
-    Bills = pd.read_sql(f'SELECT * FROM {username}.recurring_transactions;',session['finance_app'])
+    Bills = pd.read_sql(f'SELECT * FROM {username}.recurring_transactions;',finance_app)
     Bills = Bills.rename(columns={'Start_Date':'Next Date'})
     Bills['Amount'] =  Bills['Amount'].apply(lambda x: f"${x:,.2f}")
     recacct = Bills['Account'].unique()
@@ -274,7 +285,8 @@ def BalanceTracking():
 @app.route('/addaccount/', methods=['POST'])
 def addacct():
     username = session['username']
-    finance_app = session['finance_app']
+    engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
+    finance_app = engine.connect()
     if request.method == 'POST':
         Account = request.form.get('Account')
         AccountType = request.form.get('AccountType')
@@ -290,7 +302,8 @@ def addacct():
 @app.route('/recurringtran/', methods=['POST'])
 def rectran():
     username = session['username']
-    finance_app = session['finance_app']
+    engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
+    finance_app = engine.connect()
     if request.method == 'POST':
         Bill = request.form.get('Bill')
         Frequency = request.form.get('Frequency')
@@ -304,7 +317,8 @@ def rectran():
 
 @app.route('/recurringtrandel/', methods=['POST'])
 def rectrandel():
-    finance_app = session['finance_app']
+    engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
+    finance_app = engine.connect()
     if request.method == 'POST':
         Bill = request.form.get('ID')
         finance_app.execute(text(f"DELETE FROM {username}.`recurring_transactions` WHERE (`idrecurring transactions` = :Bill)"),{'Bill':Bill})
@@ -313,8 +327,9 @@ def rectrandel():
     
 @app.route('/recurringtranpaid/', methods=['POST'])
 def rectranpaid():
-    global finance_app
-    finance_app = finance_app
+    username = session['username']
+    engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
+    finance_app = engine.connect()
     if request.method == 'POST':
         Bills = pd.read_sql(f'SELECT * FROM {username}.recurring_transactions;',finance_app)
         Bills = Bills.rename(columns={'Start_Date':'Next Date'})
@@ -347,8 +362,9 @@ def rectranpaid():
     
 @app.route('/recurringtranedit/', methods=['POST','GET'])
 def rectranedit():
-    global finance_app
-    finance_app = finance_app
+    username = session['username']
+    engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
+    finance_app = engine.connect()
     if request.method == 'POST':
         ID = request.form.get('ID')
         Bill = request.form.get('Bill')
@@ -385,8 +401,9 @@ def Transactions():
 
 @app.route('/trandel/', methods=['POST'])
 def trandel():
-    global finance_app
-    finance_app = finance_app
+    username = session['username']
+    engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
+    finance_app = engine.connect()
     if request.method == 'POST':
         Tran = request.form.get('ID')
         finance_app.execute(text(f"DELETE FROM {username}.`transactions` WHERE (`idTransactions` = :Tran)"),{'Tran':Tran})
@@ -395,8 +412,9 @@ def trandel():
 
 @app.route('/tranadd/', methods=['POST','GET'])
 def tranadd():
-    global finance_app
-    finance_app = finance_app
+    username = session['username']
+    engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
+    finance_app = engine.connect()
     if request.method == 'POST':
         Date = request.form.get('Date')
         Transaction = request.form.get('Transaction')
@@ -410,8 +428,9 @@ def tranadd():
 
 @app.route('/tranedit/', methods=['POST','GET'])
 def tranedit():
-    global finance_app
-    finance_app = finance_app
+    username = session['username']
+    engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
+    finance_app = engine.connect()
     if request.method == 'POST':
         ID = request.form.get('ID')
         Date = request.form.get('Date1')
@@ -426,8 +445,9 @@ def tranedit():
 
 @app.route('/tranupload/', methods=['POST','GET'])
 def tranupload():
-    global finance_app
-    finance_app = finance_app
+    username = session['username']
+    engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
+    finance_app = engine.connect()
     if request.method == 'POST':
         csv = request.files.get('CSV')
         csv_df = pd.read_csv(csv)
@@ -475,6 +495,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
