@@ -258,7 +258,7 @@ def BalanceTracking():
     if timeframe == None:
         timeframe = 'Year'
     table1 = Bills
-    table1['Edit'] = table1['idrecurring_transactions'].apply(lambda x: f'<button onclick="editrecurring({x},\'{Bill(x,'Bill')}\',\'{Bill(x,'Frequency')}\',\'{Bill(x,'Date')}\',\'{Bill(x,'Amount')}\',\'{Bill(x,'Account')}\')" style="padding: 10px 20px; background-color: #28a745; color: #fff; border: none; border-radius: 5px;">Edit</button>')
+    table1['Edit'] = table1['idrecurring_transactions'].apply(lambda x: f'<button onclick="editrecurring({x},\'{Bill(x,'Bill')}\',\'{Bill(x,'Frequency')}\',\'{Bill(x,'Date')}\',\'{Bill(x,'Amount')}\',\'{Bill(x,'Account')}\')" style="padding: 5px 10px; background-color: #28a745; color: #fff; border: none; border-radius: 5px;">Edit</button>')
     table1['Delete'] = table1['idrecurring_transactions'].apply(lambda x: f'<form action="/recurringtrandel/" method="POST" onsubmit="return confirm(\'Are you sure?\');"><input type="hidden" name="ID" value="{x}"><button type="submit">Delete</button></form>')
     table1['Mark Paid'] = table1['idrecurring_transactions'].apply(lambda x: f'<form action="/recurringtranpaid/" method="POST"><input type="hidden" name="ID" value="{x}"><button type="submit">Mark Paid</button></form>')
     table1 = table1.sort_values(by=['Next Date'])
@@ -511,6 +511,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
