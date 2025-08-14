@@ -286,7 +286,7 @@ def BalanceTracking():
     graph = graph.to_html()
     table2 = table2.dropna()
     table2 = table2[table2['Transaction']!='Daily']
-    table2 = table2.to_html(classes='table table-stripped',escape=False,index=False,table_id='Tracking').replace('<td>', '<td align="right">')
+    table2 = table2.to_html(classes='table table-stripped',escape=False,index=False,table_id='Tracking')
     finance_app.close()
     return render_template('BalanceTracking.html', Bills = table1, Tracking = table2, acct = acct, account = recacct, graph_json = graph, allacct = account, timeframe = timeframe)
 
@@ -511,6 +511,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
