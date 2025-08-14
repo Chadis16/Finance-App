@@ -36,6 +36,7 @@ def login(username,password):
         test = test.iat[0,2]
         try:
             ph.verify(test, password)
+            users.close()
             return "Pass"
         except Exception:
             print('Fail')
@@ -66,8 +67,6 @@ def signin():
         password = request.form.get('Password')
         Ok = login(username,password)
         if Ok == 'Pass':
-            engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
-            finance_app = engine.connect()
             return redirect(url_for('BalanceTracking'))
         elif Ok == 'Fail':
             return render_template('LoginFail.html')
@@ -506,6 +505,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
