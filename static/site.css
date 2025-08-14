@@ -79,6 +79,12 @@ html {
     text-align: right;
 }
 
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 5px;
+}
+
 th {
     border: 1px solid #ddd;
     padding: 5px;
