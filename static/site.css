@@ -79,7 +79,7 @@ html {
     text-align: right;
 }
 
-td .btn{
+table .btn{
     vertical-align: top;
 }
 
@@ -96,7 +96,7 @@ tr:nth-child(even) {
 }
 
 tr:nth-child(odd) {
-    background-color: rgb(204, 240, 240);
+    background-color: rgb(221, 243, 236);
 }
 
 .popup {
