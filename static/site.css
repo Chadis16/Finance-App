@@ -92,6 +92,10 @@ table thead tr:last-child th:last-child {
     border-top-right-radius: 10px;
 }
 
+thead {
+    border: none;
+}
+
 th {
     border: none;
     padding: 5px;
