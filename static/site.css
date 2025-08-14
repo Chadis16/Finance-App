@@ -82,6 +82,7 @@ html {
 table {
     border-collapse: separate;
     border-spacing: 0;
+    border: none;
 }
 
 table thead tr:first-child th:first-child {
