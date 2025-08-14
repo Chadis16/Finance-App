@@ -410,7 +410,6 @@ def Transactions():
     else:
         table = table[table['Account']==request.form.get('Account')]
         table = table.to_html(escape=False,index=False,table_id='transactions table').replace('<td>', '<td align="right">')
-    finance_app.close()
     return render_template('Transactions.html',account = account, table = table, acct = acct, categories = categories,balance = balance)
 
 @app.route('/trandel/', methods=['POST'])
@@ -512,6 +511,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
