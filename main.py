@@ -451,7 +451,7 @@ def tranupload():
     finance_app = engine.connect()
     if request.method == 'POST':
         csv = request.files.get('CSV')
-        csv_df = pd.read_csv(csv,na_filter=False)
+        csv_df = pd.read_csv(csv)
         for index, row in csv_df.iterrows():
             Date = row['Date']
             Transaction = row['Transaction']
@@ -495,6 +495,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
