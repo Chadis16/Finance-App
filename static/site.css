@@ -1,9 +1,10 @@
-/* body {
+body {
     background-image: url('background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
-} */
+}
+
 html {
     height: 100%;
     margin: 0;
@@ -70,6 +71,14 @@ html {
     margin-bottom: 10px;
 }
 
+.center-align {
+    text-align: center;
+}
+
+.right-align {
+    text-align: right;
+}
+
 th {
     border: 1px solid #ddd;
     padding: 5px;
@@ -78,16 +87,12 @@ th {
     height: fit-content;
 }
 
-td {
-    border: 1px solid #ddd;
-    padding: 5px;
-    text-align: right;
-    width: fit-content;
-    height: fit-content;
-}
-
 tr:nth-child(even) {
     background-color: #f2f2f2;
+}
+
+tr:nth-child(odd) {
+    background-color: aqua;
 }
 
 .popup {
