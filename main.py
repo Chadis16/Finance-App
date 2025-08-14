@@ -75,7 +75,6 @@ def signin():
 
 @app.route('/Register',methods=['POST','GET'])
 def register():
-    global username
     ph = PasswordHasher()
     engine = create_engine("mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/users", echo=True)
     users = engine.connect()
@@ -195,6 +194,7 @@ def Balance_Tracking():
     return BalanceTrack
 
 def Transact():
+    sername = session['username']
     engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
     finance_app = engine.connect()
     transactions = pd.read_sql('SELECT * from transactions;',finance_app)
@@ -211,6 +211,7 @@ def Balances():
     return balance
 
 def Account():
+    username = session['username']
     engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
     finance_app = engine.connect()
     transactions = pd.read_sql('SELECT * from transactions;',finance_app)
@@ -495,6 +496,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
