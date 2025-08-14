@@ -258,12 +258,12 @@ def BalanceTracking():
     if timeframe == None:
         timeframe = 'Year'
     table1 = Bills
-    table1['Edit'] = table1['idrecurring_transactions'].apply(lambda x: f'<button onclick="editrecurring({x},\'{Bill(x,'Bill')}\',\'{Bill(x,'Frequency')}\',\'{Bill(x,'Date')}\',\'{Bill(x,'Amount')}\',\'{Bill(x,'Account')}\')" style="padding: 5px 10px; background-color: #28a745; color: #fff; border: none; border-radius: 5px;">Edit</button>')
-    table1['Delete'] = table1['idrecurring_transactions'].apply(lambda x: f'<form action="/recurringtrandel/" method="POST" onsubmit="return confirm(\'Are you sure?\');"><input type="hidden" name="ID" value="{x}"><button type="submit">Delete</button></form>')
-    table1['Mark Paid'] = table1['idrecurring_transactions'].apply(lambda x: f'<form action="/recurringtranpaid/" method="POST"><input type="hidden" name="ID" value="{x}"><button type="submit">Mark Paid</button></form>')
+    table1['Edit'] = table1['idrecurring_transactions'].apply(lambda x: f'<button onclick="editrecurring({x},\'{Bill(x,'Bill')}\',\'{Bill(x,'Frequency')}\',\'{Bill(x,'Date')}\',\'{Bill(x,'Amount')}\',\'{Bill(x,'Account')}\')" style="padding: 5px 10px; background-color: #28a745; color: #fff; border: none; border-radius: 5px;" class="btn">Edit</button>')
+    table1['Delete'] = table1['idrecurring_transactions'].apply(lambda x: f'<form action="/recurringtrandel/" method="POST" onsubmit="return confirm(\'Are you sure?\');"><input type="hidden" name="ID" value="{x}"><button type="submit" class="btn">Delete</button></form>')
+    table1['Mark Paid'] = table1['idrecurring_transactions'].apply(lambda x: f'<form action="/recurringtranpaid/" method="POST"><input type="hidden" name="ID" value="{x}"><button type="submit" class="btn">Mark Paid</button></form>')
     table1 = table1.sort_values(by=['Next Date'])
     table1 = table1.drop(columns=['idrecurring_transactions'])
-    
+
     table1 = table1.to_html(classes='table table-stripped',escape=False,index=False,table_id='Bills Table')
     table2 = BalanceTrack
     if acct == 'All':

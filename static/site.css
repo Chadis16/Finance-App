@@ -79,6 +79,10 @@ html {
     text-align: right;
 }
 
+td .btn{
+    vertical-align: top;
+}
+
 th {
     border: 1px solid #ddd;
     padding: 5px;
