@@ -84,14 +84,12 @@ table {
     border-spacing: 0;
 }
 
-table thead tr:first-child th:first-child,
-table tbody tr:first-child td:first-child{
-    border-top-left-radius: 5px;
+table thead tr:first-child th:first-child {
+    border-top-left-radius: 10px;
 }
 
-table thead tr:last-child th:last-child,
-table tbody tr:last-child td:last-child{
-    border-top-right-radius: 5px;
+table thead tr:last-child th:last-child {
+    border-top-right-radius: 10px;
 }
 
 th {
