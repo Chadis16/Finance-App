@@ -331,7 +331,7 @@ def rectrandel():
     finance_app = engine.connect()
     if request.method == 'POST':
         Bill = request.form.get('ID')
-        finance_app.execute(text(f"DELETE FROM {username}.`recurring_transactions` WHERE (`idrecurring transactions` = :Bill)"),{'Bill':Bill})
+        finance_app.execute(text(f"DELETE FROM {username}.`recurring_transactions` WHERE (`idrecurring_transactions` = :Bill)"),{'Bill':Bill})
         finance_app.commit()
         finance_app.close()
         return redirect(url_for('BalanceTracking'))
@@ -355,19 +355,19 @@ def rectranpaid():
         Account = Bills.iat[0,5]
         print(Frequency)
         if Frequency == 'One Time':
-            finance_app.execute(text(f"DELETE FROM {username}.`recurring_transactions` WHERE (`idrecurring transactions` = :Bill)"),{'Bill':ID})
+            finance_app.execute(text(f"DELETE FROM {username}.`recurring_transactions` WHERE (`idrecurring_transactions` = :Bill)"),{'Bill':ID})
         elif Frequency == 'Weekly':
             NewDate = StartDate + timedelta(days=7)
-            finance_app.execute(text(f"UPDATE {username}.`recurring_transactions` SET `Start_Date` = :Date WHERE (`idrecurring transactions` = :Bill)"),{'Bill':ID,'Date':NewDate})
+            finance_app.execute(text(f"UPDATE {username}.`recurring_transactions` SET `Start_Date` = :Date WHERE (`idrecurring_transactions` = :Bill)"),{'Bill':ID,'Date':NewDate})
         elif Frequency == 'Bi Weekly':
             NewDate = StartDate + timedelta(days=14)
-            finance_app.execute(text(f"UPDATE {username}.`recurring_transactions` SET `Start_Date` = :Date WHERE (`idrecurring transactions` = :Bill)"),{'Bill':ID,'Date':NewDate})
+            finance_app.execute(text(f"UPDATE {username}.`recurring_transactions` SET `Start_Date` = :Date WHERE (`idrecurring_transactions` = :Bill)"),{'Bill':ID,'Date':NewDate})
         elif Frequency == 'Monthly':
             NewDate = StartDate + relativedelta(months=1)
-            finance_app.execute(text(f"UPDATE {username}.`recurring_transactions` SET `Start_Date` = :Date WHERE (`idrecurring transactions` = :Bill)"),{'Bill':ID,'Date':NewDate})
+            finance_app.execute(text(f"UPDATE {username}.`recurring_transactions` SET `Start_Date` = :Date WHERE (`idrecurring_transactions` = :Bill)"),{'Bill':ID,'Date':NewDate})
         elif Frequency == 'Anually':
             NewDate = StartDate + timedelta(days=365)
-            finance_app.execute(text(f"UPDATE {username}.`recurring_transactions` SET `Start_Date` = :Date WHERE (`idrecurring transactions` = :Bill)"),{'Bill':ID,'Date':NewDate})
+            finance_app.execute(text(f"UPDATE {username}.`recurring_transactions` SET `Start_Date` = :Date WHERE (`idrecurring_transactions` = :Bill)"),{'Bill':ID,'Date':NewDate})
         finance_app.commit()
         finance_app.close()
         return redirect(url_for('BalanceTracking'))
@@ -511,6 +511,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
