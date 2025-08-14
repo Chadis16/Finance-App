@@ -454,13 +454,13 @@ def tranupload():
         csv_df = pd.read_csv(csv,na_filter=False)
         for index, row in csv_df.iterrows():
             Date = row['Date']
-            print(Date)
             Transaction = row['Transaction']
             Amount = row['Amount']
             Category = row['Category']
             Account = row['Account']
-            finance_app.execute(text(f"""INSERT INTO {username}.`transactions` (`Date`, `Transaction`, `Amount`, `Category`, `Account`) VALUES (:Date, :Transaction, :Amount, :Category, :Account)"""),
-                         {'Date':Date,'Transaction':Transaction,'Amount':Amount,'Category':Category,'Account':Account})
+            if Date is not None:
+                finance_app.execute(text(f"""INSERT INTO {username}.`transactions` (`Date`, `Transaction`, `Amount`, `Category`, `Account`) VALUES (:Date, :Transaction, :Amount, :Category, :Account)"""),
+                             {'Date':Date,'Transaction':Transaction,'Amount':Amount,'Category':Category,'Account':Account})
         finance_app.commit()
         return redirect(url_for('Transactions'))
 
@@ -495,6 +495,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
