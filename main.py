@@ -491,12 +491,13 @@ def Budget():
     transactions = Transact()
     transactions['Month'] = pd.to_datetime(transactions['Date']).dt.month
     transactions['Year'] = pd.to_datetime(transactions['Date']).dt.year
-    transactions = transactions.groupby(['Year','Month','Category'])['Amount'].sum()
-    transactions = transactions.to_frame()
-    transactions = transactions.reset_index()
-    transactions['Amount'] = transactions['Amount'].round(2)
-    transactions['Amount'] = transactions['Amount'].apply(lambda x: f"${x:,.2f}")
-    transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
+    # transactions = transactions.groupby(['Year','Month','Category'])['Amount'].sum()
+    # transactions = transactions.to_frame()
+    # transactions = transactions.reset_index()
+    # transactions['Amount'] = transactions['Amount'].round(2)
+    # transactions['Amount'] = transactions['Amount'].apply(lambda x: f"${x:,.2f}")
+    # transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
+    # # transactions = transactions[transactions['Category'] is in ['Bars/Alcohol','Coffee','Fast Food','Grocieries','Insurance','Misc','Rent']
     return render_template('budget.html',transactions=transactions)
 
 @app.route('/Investments/')
@@ -530,6 +531,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
