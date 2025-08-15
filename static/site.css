@@ -1,5 +1,5 @@
 body {
-    background-image: url('source.gif');
+    background-image: url('nodes.gif');
 /*     background-repeat: no-repeat; */
     background-size: cover;
     background-position: center center;
@@ -148,5 +148,6 @@ td:nth-child(8) {
     }
 
 } */
+
 
 
