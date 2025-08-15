@@ -14,6 +14,7 @@ import numpy as np
 from sqlalchemy import create_engine, insert, MetaData, Table, Column, Integer, String, DATE, FLOAT, text
 from argon2 import PasswordHasher
 import logging
+import calendar
 
 logging.basicConfig(filename='flask_debug.log', level=logging.DEBUG)
 
@@ -495,6 +496,7 @@ def Budget():
     today = date.today()
     currentmon = today.month
     currentyear = today.year
+    curmonstr = calendar.month_name[currentmon]
     transactions = Transact()
     transactions['Month'] = pd.to_datetime(transactions['Date']).dt.month
     transactions['Year'] = pd.to_datetime(transactions['Date']).dt.year
@@ -520,7 +522,7 @@ def Budget():
     #     transactions = transactions[transactions['Year']==year]
     #     transactions = transactions[transactions['Month']==month]
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
-    return render_template('budget.html',transactions=transactions,year=years,curyear=currentyear,curmon=currentmon)
+    return render_template('budget.html',transactions=transactions,year=years,curyear=currentyear,curmon=currentmon,curmonstr=curmonstr)
 
 @app.route('/Investments/')
 def Investment():
@@ -553,6 +555,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
