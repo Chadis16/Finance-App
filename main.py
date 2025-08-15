@@ -224,9 +224,6 @@ def Account():
     engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
     finance_app = engine.connect()
     account = pd.read_sql('SELECT * from accounts;',finance_app)
-    # account = account['Account'].unique()
-    # account = np.sort(account)
-    # account = np.insert(account, 0, 'All')
     finance_app.close()
     return account
 
@@ -516,12 +513,12 @@ def Budget():
                                                                 'Streaming','Travel','Utilities'])]
     year = transactions['Year'].unique()
     year = np.sort(year)
-    if year is None:
-        transactions = transactions[transactions['Year']==currentyear]
-        transactions = transactions[transactions['Month']==currentmon]
-    else:
-        transactions = transactions[transactions['Year']==year]
-        transactions = transactions[transactions['Month']==month]
+    # if year is None:
+    #     transactions = transactions[transactions['Year']==currentyear]
+    #     transactions = transactions[transactions['Month']==currentmon]
+    # else:
+    #     transactions = transactions[transactions['Year']==year]
+    #     transactions = transactions[transactions['Month']==month]
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
     return render_template('budget.html',transactions=transactions,year=year)
 
@@ -556,4 +553,5 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
