@@ -486,6 +486,10 @@ def tranupload():
         finance_app.close()
         return redirect(url_for('Transactions'))
 
+@app.route('/Budget')
+def Budget():
+    return render_template('budget.html')
+
 @app.route('/Investments/')
 def Investment():
     investments = investment_transactions.groupby(['Account','Ticker'])['Quantity'].sum()
