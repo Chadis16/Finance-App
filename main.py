@@ -119,7 +119,7 @@ def register():
 @app.route('/LogOut')
 def LogOut():
     session['username'] = ''
-    return render_template('Login.html')
+    return redirect(url_for('/'))
 
 def Bill(x,y):
     username = session['username']
