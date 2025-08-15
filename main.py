@@ -509,9 +509,10 @@ def Budget():
                                                                 'Grocieries','Insurance','Interest','Internet',
                                                                 'Loan Payment','Misc','Rent','Restaraunts','Shopping',
                                                                 'Streaming','Travel','Utilities'])]
-    account = account.to_html(escape=False,index=False,table_id='Accounts')
+    year = transactions['Year'].unique()
+    year = np.sort_values()
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
-    return render_template('budget.html',transactions=transactions)
+    return render_template('budget.html',transactions=transactions,year=year)
 
 @app.route('/Investments/')
 def Investment():
