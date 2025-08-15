@@ -491,8 +491,13 @@ def tranupload():
         finance_app.close()
         return redirect(url_for('Transactions'))
 
-@app.route('/Budget')
+@app.route('/Budget', methods=['POST','GET'])
 def Budget():
+    year = request.form.get('Year')
+    month = request.form.get('Month')
+    date = datetime.now()
+    currentmon = date.month
+    currentyear = date.year
     transactions = Transact()
     transactions['Month'] = pd.to_datetime(transactions['Date']).dt.month
     transactions['Year'] = pd.to_datetime(transactions['Date']).dt.year
@@ -511,6 +516,12 @@ def Budget():
                                                                 'Streaming','Travel','Utilities'])]
     year = transactions['Year'].unique()
     year = np.sort(year)
+    if year is None:
+        transactions = transactions[transactions['Year']==currentyear]
+        transactions = transactions[transactions['Month']==currentmon]
+    else:
+        transactions = transactions[transactions['Year']==year]
+        transactions = transactions[transactions['Month']==month]
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
     return render_template('budget.html',transactions=transactions,year=year)
 
