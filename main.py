@@ -498,6 +498,7 @@ def Budget():
     transactions['Year'] = pd.to_datetime(transactions['Date']).dt.year
     account = Account()
     account = pd.DataFrame(account)
+    transactions = pd.merge(transactions,account,on='Account',how='right')
     # transactions = transactions.groupby(['Year','Month','Category'])['Amount'].sum()
     # transactions = transactions.to_frame()
     # transactions = transactions.reset_index()
