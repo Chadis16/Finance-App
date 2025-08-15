@@ -499,12 +499,13 @@ def Budget():
     account = Account()
     account = pd.DataFrame(account)
     transactions = pd.merge(transactions,account,on='Account',how='right')
+    transactions = transactions[transactions['Account Type'] is in ['Checking','Credit Card','Savings']]
     # transactions = transactions.groupby(['Year','Month','Category'])['Amount'].sum()
     # transactions = transactions.to_frame()
     # transactions = transactions.reset_index()
     # transactions['Amount'] = transactions['Amount'].round(2)
     # transactions['Amount'] = transactions['Amount'].apply(lambda x: f"${x:,.2f}")
-    # # transactions = transactions[transactions['Category'] is in ['Bars/Alcohol','Coffee','Fast Food','Grocieries','Insurance','Misc','Rent']
+    # transactions = transactions[transactions['Category'] != 'CC Payment']
     account = account.to_html(escape=False,index=False,table_id='Accounts')
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
     return render_template('budget.html',transactions=transactions,account=account)
