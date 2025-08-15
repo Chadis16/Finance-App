@@ -510,7 +510,7 @@ def Budget():
                                                                 'Loan Payment','Misc','Rent','Restaraunts','Shopping',
                                                                 'Streaming','Travel','Utilities'])]
     year = transactions['Year'].unique()
-    year = np.sort_values()
+    year = np.sort(year)
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
     return render_template('budget.html',transactions=transactions,year=year)
 
@@ -545,6 +545,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
