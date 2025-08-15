@@ -223,9 +223,8 @@ def Account():
     username = session['username']
     engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
     finance_app = engine.connect()
-    transactions = pd.read_sql('SELECT * from transactions;',finance_app)
-    transactions['Date'] = pd.to_datetime(transactions['Date'])
-    account = transactions['Account'].unique()
+    account = pd.read_sql('SELECT * from accounts;',finance_app)
+    account = account['Account'].unique()
     account = np.sort(account)
     account = np.insert(account, 0, 'All')
     finance_app.close()
@@ -491,15 +490,16 @@ def Budget():
     transactions = Transact()
     transactions['Month'] = pd.to_datetime(transactions['Date']).dt.month
     transactions['Year'] = pd.to_datetime(transactions['Date']).dt.year
+    account = Account()
     # transactions = transactions.groupby(['Year','Month','Category'])['Amount'].sum()
     # transactions = transactions.to_frame()
     # transactions = transactions.reset_index()
     # transactions['Amount'] = transactions['Amount'].round(2)
     # transactions['Amount'] = transactions['Amount'].apply(lambda x: f"${x:,.2f}")
     # # transactions = transactions[transactions['Category'] is in ['Bars/Alcohol','Coffee','Fast Food','Grocieries','Insurance','Misc','Rent']
-    
+    account = account.to_html(escape=False,index=False,table_id='Accounts')
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
-    return render_template('budget.html',transactions=transactions)
+    return render_template('budget.html',transactions=transactions,account=account)
 
 @app.route('/Investments/')
 def Investment():
@@ -532,6 +532,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
