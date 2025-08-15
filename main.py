@@ -495,7 +495,7 @@ def tranupload():
 def Budget():
     year = request.form.get('Year')
     month = request.form.get('Month')
-    date = datetime.now()
+    date = datetime.today()
     currentmon = date.month
     currentyear = date.year
     transactions = Transact()
@@ -556,46 +556,3 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
