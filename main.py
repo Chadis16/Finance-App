@@ -505,7 +505,7 @@ def Budget():
     transactions = transactions.reset_index()
     transactions['Amount'] = transactions['Amount'].round(2)
     transactions['Amount'] = transactions['Amount'].apply(lambda x: f"${x:,.2f}")
-    # transactions = transactions[transactions['Category'] != 'CC Payment']
+    transactions = transactions[transactions['Category'].isin(['Bars/Alcohol','Car Payment','Coffee','Fast Food','Grocieries','Insurance','Interest','Internet','Loan Payment','Misc','Rent','Restaraunts','Shopping','Streaming','Travel','Utilities'])]
     account = account.to_html(escape=False,index=False,table_id='Accounts')
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
     return render_template('budget.html',transactions=transactions,account=account)
