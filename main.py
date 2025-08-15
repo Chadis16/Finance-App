@@ -488,7 +488,9 @@ def tranupload():
 
 @app.route('/Budget')
 def Budget():
-    return render_template('budget.html')
+    transactions = Transact()
+    transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
+    return render_template('budget.html',transactions=transactions)
 
 @app.route('/Investments/')
 def Investment():
