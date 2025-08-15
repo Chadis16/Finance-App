@@ -224,9 +224,9 @@ def Account():
     engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
     finance_app = engine.connect()
     account = pd.read_sql('SELECT * from accounts;',finance_app)
-    account = account['Account'].unique()
-    account = np.sort(account)
-    account = np.insert(account, 0, 'All')
+    # account = account['Account'].unique()
+    # account = np.sort(account)
+    # account = np.insert(account, 0, 'All')
     finance_app.close()
     return account
 
@@ -249,6 +249,9 @@ def BalanceTracking():
     app.logger.debug("This is a debug message from the index route.")
     BalanceTrack = Balance_Tracking()
     account = Account()
+    account = account['Account'].unique()
+    account = np.sort(account)
+    account = np.insert(account, 0, 'All')
     Bills = pd.read_sql(f'SELECT * FROM {username}.recurring_transactions;',finance_app)
     Bills = Bills.rename(columns={'Start_Date':'Next Date'})
     Bills['Amount'] =  Bills['Amount'].apply(lambda x: f"${x:,.2f}")
@@ -399,6 +402,9 @@ def rectranedit():
 def Transactions():
     table = Transact()
     account = Account()
+    account = account['Account'].unique()
+    account = np.sort(account)
+    account = np.insert(account, 0, 'All')
     categories = Categories()
     balance = Balances()
     balance = balance.to_html(escape=False,index=False,table_id='Balance').replace('<td>', '<td align="right">')
@@ -533,6 +539,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
