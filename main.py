@@ -116,6 +116,11 @@ def register():
                 x = 0
                 return redirect(url_for('BalanceTracking'))
 
+@app.route('/LogOut')
+def LogOut():
+    session['username'] = ''
+    return render_template('Login.html')
+
 def Bill(x,y):
     username = session['username']
     engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
