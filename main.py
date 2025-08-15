@@ -489,6 +489,8 @@ def tranupload():
 @app.route('/Budget')
 def Budget():
     transactions = Transact()
+    transactions['Month'] = transactions['Date'].dt.month
+    transactions['Year'] = transactions['Date'].dt.year
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
     return render_template('budget.html',transactions=transactions)
 
