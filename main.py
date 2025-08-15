@@ -499,7 +499,7 @@ def Budget():
     account = Account()
     account = pd.DataFrame(account)
     transactions = pd.merge(transactions,account,on='Account',how='right')
-    transactions = transactions[transactions['Account Type'] is in ['Checking','Credit Card','Savings']]
+    transactions = transactions[transactions['Account Type'] isin ['Checking','Credit Card','Savings']]
     # transactions = transactions.groupby(['Year','Month','Category'])['Amount'].sum()
     # transactions = transactions.to_frame()
     # transactions = transactions.reset_index()
