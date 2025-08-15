@@ -119,7 +119,7 @@ def register():
 @app.route('/LogOut')
 def LogOut():
     session['username'] = ''
-    return redirect(url_for('login'))
+    return redirect(url_for('signin'))
 
 def Bill(x,y):
     username = session['username']
@@ -517,6 +517,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
