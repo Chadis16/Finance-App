@@ -489,8 +489,8 @@ def tranupload():
 @app.route('/Budget')
 def Budget():
     transactions = Transact()
-    transactions['Month'] = transactions['Date'].dt.month
-    transactions['Year'] = transactions['Date'].dt.year
+    transactions['Month'] = pd.to_datetime(transactions['Date']).dt.month
+    transactions['Year'] = pd.to_datetime(transactions['Date']).dt.year
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
     return render_template('budget.html',transactions=transactions)
 
@@ -525,6 +525,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
