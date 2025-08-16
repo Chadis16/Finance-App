@@ -79,7 +79,7 @@ def register():
     engine = create_engine("mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/users", echo=True)
     users = engine.connect()
     x = 1
-    session[username] = request.form.get('User')
+    session['username'] = request.form.get('User')
     username = session['username']
     if username == None:
         return render_template('Register.html')
@@ -555,6 +555,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
