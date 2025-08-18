@@ -528,13 +528,13 @@ def Budget():
         y = year
         transactions = transactions[transactions['Year']==y]
         transactions = transactions[transactions['Month']==mon]
+    app.logger.debug(transactions['Month'].dtype)
+    app.logger.debug(transactions['Year'].dtype)
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
     app.logger.debug(mon)
     app.logger.debug(y)
     app.logger.debug(type(mon))
     app.logger.debug(type(y))
-    app.logger.debug(transactions['Month'].dtype)
-    app.logger.debug(transactions['Year'].dtype)
     return render_template('budget.html',transactions=transactions,mon=mon,year=y)
 
 @app.route('/Investments/')
@@ -568,6 +568,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
