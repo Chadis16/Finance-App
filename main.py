@@ -516,18 +516,18 @@ def Budget():
                                                                 'Streaming','Travel','Utilities'])]
     years = transactions['Year'].unique()
     years = np.sort(years)
-    if year is None:
-        mon = int(currentmon)
-        monstr = calendar.month_name[mon]
-        y = currentyear
-        # transactions = transactions[transactions['Year']==y]
-        # transactions = transactions[transactions['Month']==mon]
-    else:
-        mon = int(month)
-        monstr = calendar.month_name[mon]
-        y = year
-        # transactions = transactions[transactions['Year']==y]
-        # transactions = transactions[transactions['Month']==mon]
+    # if year is None:
+    #     mon = int(currentmon)
+    #     monstr = calendar.month_name[mon]
+    #     y = currentyear
+    #     transactions = transactions[transactions['Year']==y]
+    #     transactions = transactions[transactions['Month']==mon]
+    # else:
+    #     mon = int(month)
+    #     monstr = calendar.month_name[mon]
+    #     y = year
+    #     transactions = transactions[transactions['Year']==y]
+    #     transactions = transactions[transactions['Month']==mon]
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
     return render_template('budget.html',years = years,mon=mon,year=y,monstr=monstr)
 
@@ -562,6 +562,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
