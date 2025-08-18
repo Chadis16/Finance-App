@@ -6,29 +6,30 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body style="display: flex;justify-content: center;align-items: center;">
-        <div class="background">
-            <span class="ball"></span>
-            <span class="ball"></span>
-            <span class="ball"></span>
-            <span class="ball"></span>
-            <span class="ball"></span>
-            <span class="ball"></span>
-        </div>
-        <div class="main" style= "background-color: rgba(239,245,247,0.75); border-radius: 10px;">
-            <h1>Enter your login credentials</h1>
-            <form method="POST">
-                <label for="User">User:</label>
-                <input type="text" id="User" name="User" placeholder="Enter your username" required style="margin-left: 31px;">
-                <br>
-                <label for="Password">Password:</label>
-                <input type="password" id="Password" name="Password" placeholder="Enter your password" required>
-                <br>
-                <button type="submit" style="display: block; margin: 0 auto;">Login</button>
-            </form>
-            <p>Not registered?
-                <a href="Register" style="text-decoration: none;">Create an account</a>
-            </p>
+        <div class="container">
+            <div class="background">
+                <span class="ball"></span>
+                <span class="ball"></span>
+                <span class="ball"></span>
+                <span class="ball"></span>
+                <span class="ball"></span>
+                <span class="ball"></span>
+            </div>
+            <div class="main" style= "background-color: rgba(239,245,247,0.75); border-radius: 10px;">
+                <h1>Enter your login credentials</h1>
+                <form method="POST">
+                    <label for="User">User:</label>
+                    <input type="text" id="User" name="User" placeholder="Enter your username" required style="margin-left: 31px;">
+                    <br>
+                    <label for="Password">Password:</label>
+                    <input type="password" id="Password" name="Password" placeholder="Enter your password" required>
+                    <br>
+                    <button type="submit" style="display: block; margin: 0 auto;">Login</button>
+                </form>
+                <p>Not registered?
+                    <a href="Register" style="text-decoration: none;">Create an account</a>
+                </p>
+            </div>
         </div>
     </body>
-
 </html>
