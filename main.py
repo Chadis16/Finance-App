@@ -205,6 +205,7 @@ def Balance_Tracking():
 
 def Transact():
     username = session['username']
+    print(username)
     engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
     finance_app = engine.connect()
     transactions = pd.read_sql('SELECT * from transactions;',finance_app)
@@ -498,6 +499,7 @@ def Budget():
     currentmon = today.month
     currentyear = today.year
     # curmonstr = calendar.month_name[currentmon]
+    print(username)
     transactions = Transact()
     # transactions['Month'] = pd.to_datetime(transactions['Date']).dt.month
     # transactions['Year'] = pd.to_datetime(transactions['Date']).dt.year
@@ -562,6 +564,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
