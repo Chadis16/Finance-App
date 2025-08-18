@@ -87,6 +87,7 @@ def register():
     else:
         while x == 1:
             user = pd.read_sql('SELECT * FROM users.users;',users)
+            app.logger.debug(user)
             app.logger.debug(username)
             if username in user:
                 return render_template('RegisterUserTaken.html')
@@ -573,6 +574,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
