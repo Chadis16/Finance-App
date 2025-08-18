@@ -504,12 +504,12 @@ def Budget():
     account = Account()
     account = pd.DataFrame(account)
     transactions = pd.merge(transactions,account,on='Account',how='right')
-    transactions = transactions[transactions['Account Type'].isin(['Checking','Credit Card','Savings'])]
-    transactions = transactions.groupby(['Year','Month','Category'])['Amount'].sum()
-    transactions = transactions.to_frame()
-    transactions = transactions.reset_index()
-    transactions['Amount'] = transactions['Amount'].round(2)
-    transactions['Amount'] = transactions['Amount'].apply(lambda x: f"${x:,.2f}")
+    # transactions = transactions[transactions['Account Type'].isin(['Checking','Credit Card','Savings'])]
+    # transactions = transactions.groupby(['Year','Month','Category'])['Amount'].sum()
+    # transactions = transactions.to_frame()
+    # transactions = transactions.reset_index()
+    # transactions['Amount'] = transactions['Amount'].round(2)
+    # transactions['Amount'] = transactions['Amount'].apply(lambda x: f"${x:,.2f}")
     # transactions = transactions[transactions['Category'].isin(['Bars/Alcohol','Car Payment','Coffee','Fast Food',
     #                                                             'Grocieries','Insurance','Interest','Internet',
     #                                                             'Loan Payment','Misc','Rent','Restaraunts','Shopping',
