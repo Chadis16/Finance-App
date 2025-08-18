@@ -1,8 +1,5 @@
 body {
-    /* background-image: url('background.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center; */
+    margin: 0px;
     height: 100%;
 }
 
@@ -272,6 +269,7 @@ td:nth-child(8) {
     }
 
 } */
+
 
 
 
