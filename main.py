@@ -16,6 +16,7 @@ from argon2 import PasswordHasher
 import logging
 import calendar
 
+
 logging.basicConfig(filename='flask_debug.log', level=logging.DEBUG)
 
 metadata = MetaData()
@@ -268,7 +269,6 @@ def BalanceTracking():
     table1['Mark Paid'] = table1['idrecurring_transactions'].apply(lambda x: f'<form action="/recurringtranpaid/" method="POST"><input type="hidden" name="ID" value="{x}"><button type="submit" class="btn">Mark Paid</button></form>')
     table1 = table1.sort_values(by=['Next Date'])
     table1 = table1.drop(columns=['idrecurring_transactions'])
-
     table1 = table1.to_html(classes='table table-stripped',escape=False,index=False,table_id='Bills Table')
     table2 = BalanceTrack
     if acct == 'All':
@@ -294,7 +294,8 @@ def BalanceTracking():
     table2 = table2[table2['Transaction']!='Daily']
     table2 = table2.to_html(classes='table table-stripped',escape=False,index=False,table_id='Tracking')
     finance_app.close()
-    return render_template('BalanceTracking.html', Bills = table1, Tracking = table2, acct = acct, account = recacct, graph_json = graph, allacct = account, timeframe = timeframe)
+    return render_template('BalanceTracking.html', Bills = table1, Tracking = table2, acct = acct, account = recacct,
+    graph_json = graph, allacct = account, timeframe = timeframe)
 
 @app.route('/addaccount/', methods=['POST'])
 def addacct():
@@ -496,7 +497,7 @@ def Budget():
     today = date.today()
     currentmon = today.month
     currentyear = today.year
-    curmonstr = calendar.month_name[currentmon]
+    # curmonstr = calendar.month_name[currentmon]
     transactions = Transact()
     transactions['Month'] = pd.to_datetime(transactions['Date']).dt.month
     transactions['Year'] = pd.to_datetime(transactions['Date']).dt.year
@@ -515,14 +516,20 @@ def Budget():
                                                                 'Streaming','Travel','Utilities'])]
     years = transactions['Year'].unique()
     years = np.sort(years)
-    # if year is None:
-    #     transactions = transactions[transactions['Year']==currentyear]
-    #     transactions = transactions[transactions['Month']==currentmon]
-    # else:
-    #     transactions = transactions[transactions['Year']==year]
-    #     transactions = transactions[transactions['Month']==month]
+    if year is None:
+        transactions = transactions[transactions['Year']==currentyear]
+        transactions = transactions[transactions['Month']==currentmon]
+        mon = currentmon
+        monstr = calendar.month_name[mon]
+        y = currentyear
+    else:
+        mon = month
+        monstr = calendar.month_name[mon]
+        y = year
+        transactions = transactions[transactions['Year']==year]
+        transactions = transactions[transactions['Month']==month]
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
-    return render_template('budget.html',transactions=transactions,year=years,curyear=currentyear,curmon=currentmon,curmonstr=curmonstr)
+    return render_template('budget.html',years = years,mon=mon,year=y,monstr=monstr)
 
 @app.route('/Investments/')
 def Investment():

@@ -5,13 +5,14 @@ Budget
 {% block content %}
 <form method="POST">
     <select name="Year" id="Year" onchange="this.form.submit()">
-                <option value="{{ curyear }}">{{ curyear }}</option>
-                {% for year in year %}
                 <option value="{{ year }}">{{ year }}</option>
+                {% for year in year %}
+                <option value="{{ years }}">{{ years }}</option>
                 {% endfor %}
+
     </select>
     <select name="Month" id="Month" onchange="this.form.submit()">
-                <opton value={{ curmon }}>{{ curmonstr }}</opton>
+                <opton value={{ mon }}>{{ monstr }}</opton>
                 <option value="1">January</option>
                 <option value="2">Febuary</option>
                 <option value="3">March</option>
