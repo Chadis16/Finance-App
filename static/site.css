@@ -165,6 +165,7 @@ html {
     padding: 5px;
     font-family: 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     z-index: 2;
+    width: 100%;
 }
 
 .row {
