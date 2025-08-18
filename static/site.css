@@ -1,8 +1,9 @@
 body {
     background-image: url('background.jpg');
-/*     background-repeat: no-repeat; */
+    background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
+    background-attachement: fixed;
 }
 
 html {
@@ -148,6 +149,7 @@ td:nth-child(8) {
     }
 
 } */
+
 
 
 
