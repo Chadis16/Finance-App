@@ -3,7 +3,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
-    background-attachement: fixed;
+    height: 100%;
 }
 
 html {
@@ -149,6 +149,7 @@ td:nth-child(8) {
     }
 
 } */
+
 
 
 
