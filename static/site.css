@@ -26,6 +26,7 @@ html {
     left: 0;
     background: #4CB8B6;
     overflow: hidden;
+    z-index: 1;
 }
 
 .ball {
@@ -76,6 +77,7 @@ html {
 .body-content {
     padding: 5px;
     font-family: 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    z-index: 2;
 }
 
 .row {
