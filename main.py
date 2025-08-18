@@ -514,8 +514,8 @@ def Budget():
     #                                                             'Grocieries','Insurance','Interest','Internet',
     #                                                             'Loan Payment','Misc','Rent','Restaraunts','Shopping',
     #                                                             'Streaming','Travel','Utilities'])]
-    years = transactions['Year'].unique()
-    years = np.sort(years)
+    # years = transactions['Year'].unique()
+    # years = np.sort(years)
     # if year is None:
     #     mon = int(currentmon)
     #     monstr = calendar.month_name[mon]
@@ -529,7 +529,7 @@ def Budget():
     #     transactions = transactions[transactions['Year']==y]
     #     transactions = transactions[transactions['Month']==mon]
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
-    return render_template('budget.html',years = years)
+    return render_template('budget.html')
 
 @app.route('/Investments/')
 def Investment():
@@ -562,6 +562,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
