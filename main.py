@@ -205,7 +205,7 @@ def Balance_Tracking():
 
 def Transact():
     username = session['username']
-    print(username)
+    app.logger.debug(username)
     engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
     finance_app = engine.connect()
     transactions = pd.read_sql('SELECT * from transactions;',finance_app)
@@ -246,7 +246,6 @@ def BalanceTracking():
     username = session['username']
     engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
     finance_app = engine.connect()
-    app.logger.debug("This is a debug message from the index route.")
     BalanceTrack = Balance_Tracking()
     account = Account()
     account = account['Account'].unique()
@@ -499,7 +498,7 @@ def Budget():
     currentmon = today.month
     currentyear = today.year
     # curmonstr = calendar.month_name[currentmon]
-    print(session['username'])
+    app.logger.debug(session['username'])
     transactions = Transact()
     # transactions['Month'] = pd.to_datetime(transactions['Date']).dt.month
     # transactions['Year'] = pd.to_datetime(transactions['Date']).dt.year
@@ -564,6 +563,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
