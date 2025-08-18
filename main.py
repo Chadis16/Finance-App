@@ -498,40 +498,38 @@ def Budget():
     currentmon = today.month
     currentyear = today.year
     # curmonstr = calendar.month_name[currentmon]
-    app.logger.debug(session['username'])
     transactions = Transact()
-    app.logger.debug(transactions)
-    # transactions['Month'] = pd.to_datetime(transactions['Date']).dt.month
-    # transactions['Year'] = pd.to_datetime(transactions['Date']).dt.year
-    # account = Account()
-    # account = pd.DataFrame(account)
-    # transactions = pd.merge(transactions,account,on='Account',how='right')
-    # transactions = transactions[transactions['Account Type'].isin(['Checking','Credit Card','Savings'])]
-    # transactions = transactions.groupby(['Year','Month','Category'])['Amount'].sum()
-    # transactions = transactions.to_frame()
-    # transactions = transactions.reset_index()
-    # transactions['Amount'] = transactions['Amount'].round(2)
-    # transactions['Amount'] = transactions['Amount'].apply(lambda x: f"${x:,.2f}")
-    # transactions = transactions[transactions['Category'].isin(['Bars/Alcohol','Car Payment','Coffee','Fast Food',
-    #                                                             'Grocieries','Insurance','Interest','Internet',
-    #                                                             'Loan Payment','Misc','Rent','Restaraunts','Shopping',
-    #                                                             'Streaming','Travel','Utilities'])]
-    # years = transactions['Year'].unique()
-    # years = np.sort(years)
-    # if year is None:
-    #     mon = int(currentmon)
-    #     monstr = calendar.month_name[mon]
-    #     y = currentyear
-    #     transactions = transactions[transactions['Year']==y]
-    #     transactions = transactions[transactions['Month']==mon]
-    # else:
-    #     mon = int(month)
-    #     monstr = calendar.month_name[mon]
-    #     y = year
-    #     transactions = transactions[transactions['Year']==y]
-    #     transactions = transactions[transactions['Month']==mon]
+    transactions['Month'] = pd.to_datetime(transactions['Date']).dt.month
+    transactions['Year'] = pd.to_datetime(transactions['Date']).dt.year
+    account = Account()
+    account = pd.DataFrame(account)
+    transactions = pd.merge(transactions,account,on='Account',how='right')
+    transactions = transactions[transactions['Account Type'].isin(['Checking','Credit Card','Savings'])]
+    transactions = transactions.groupby(['Year','Month','Category'])['Amount'].sum()
+    transactions = transactions.to_frame()
+    transactions = transactions.reset_index()
+    transactions['Amount'] = transactions['Amount'].round(2)
+    transactions['Amount'] = transactions['Amount'].apply(lambda x: f"${x:,.2f}")
+    transactions = transactions[transactions['Category'].isin(['Bars/Alcohol','Car Payment','Coffee','Fast Food',
+                                                                'Grocieries','Insurance','Interest','Internet',
+                                                                'Loan Payment','Misc','Rent','Restaraunts','Shopping',
+                                                                'Streaming','Travel','Utilities'])]
+    years = transactions['Year'].unique()
+    years = np.sort(years)
+    if year is None:
+        mon = int(currentmon)
+        monstr = calendar.month_name[mon]
+        y = currentyear
+        transactions = transactions[transactions['Year']==y]
+        transactions = transactions[transactions['Month']==mon]
+    else:
+        mon = int(month)
+        monstr = calendar.month_name[mon]
+        y = year
+        transactions = transactions[transactions['Year']==y]
+        transactions = transactions[transactions['Month']==mon]
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
-    return render_template('budget.html')
+    return render_template('budget.html',transactions=transctions,mon=mon,year=y)
 
 @app.route('/Investments/')
 def Investment():
@@ -564,6 +562,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
