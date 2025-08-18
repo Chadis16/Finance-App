@@ -510,10 +510,10 @@ def Budget():
     transactions = transactions.reset_index()
     transactions['Amount'] = transactions['Amount'].round(2)
     transactions['Amount'] = transactions['Amount'].apply(lambda x: f"${x:,.2f}")
-    transactions = transactions[transactions['Category'].isin(['Bars/Alcohol','Car Payment','Coffee','Fast Food',
-                                                                'Grocieries','Insurance','Interest','Internet',
-                                                                'Loan Payment','Misc','Rent','Restaraunts','Shopping',
-                                                                'Streaming','Travel','Utilities'])]
+    # transactions = transactions[transactions['Category'].isin(['Bars/Alcohol','Car Payment','Coffee','Fast Food',
+    #                                                             'Grocieries','Insurance','Interest','Internet',
+    #                                                             'Loan Payment','Misc','Rent','Restaraunts','Shopping',
+    #                                                             'Streaming','Travel','Utilities'])]
     years = transactions['Year'].unique()
     years = np.sort(years)
     # if year is None:
