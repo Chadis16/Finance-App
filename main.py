@@ -537,7 +537,7 @@ def Budget():
     app.logger.debug(y)
     app.logger.debug(type(mon))
     app.logger.debug(type(y))
-    return render_template('budget.html',transactions=transactions,mon=mon,year=y)
+    return render_template('budget.html',transactions=transactions,mon=mon,year=y,monstr=monstr)
 
 @app.route('/Investments/')
 def Investment():
@@ -570,6 +570,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
