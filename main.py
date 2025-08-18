@@ -519,11 +519,11 @@ def Budget():
     if year is None:
         transactions = transactions[transactions['Year']==currentyear]
         transactions = transactions[transactions['Month']==currentmon]
-        mon = currentmon
+        mon = int(currentmon)
         monstr = calendar.month_name[mon]
         y = currentyear
     else:
-        mon = month
+        mon = int(month)
         monstr = calendar.month_name[mon]
         y = year
         transactions = transactions[transactions['Year']==year]
@@ -562,6 +562,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
