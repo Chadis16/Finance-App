@@ -535,7 +535,9 @@ def Budget():
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
     app.logger.debug(mon)
     app.logger.debug(y)
+    app.logger.debug(monstr)
     app.logger.debug(type(mon))
+    app.logger.debug(type(monstr))
     app.logger.debug(type(y))
     return render_template('budget.html',transactions=transactions,mon=mon,year=y,monstr=monstr)
 
@@ -570,6 +572,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
