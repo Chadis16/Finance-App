@@ -529,7 +529,7 @@ def Budget():
     #     transactions = transactions[transactions['Year']==y]
     #     transactions = transactions[transactions['Month']==mon]
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
-    return render_template('budget.html',years = years,mon=mon,year=y,monstr=monstr)
+    return render_template('budget.html',years = years)
 
 @app.route('/Investments/')
 def Investment():
@@ -562,6 +562,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
