@@ -6,7 +6,7 @@ Budget
 <form method="POST">
     <select name="Year" id="Year" onchange="this.form.submit()">
                 <option value="{{ year }}">{{ year }}</option>
-                {% for year in year %}
+                {% for years in years %}
                 <option value="{{ years }}">{{ years }}</option>
                 {% endfor %}
 
