@@ -7,7 +7,6 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='site.css')}}"/>
         <a href="{{ url_for('LogOut') }}" style="float: right;"><button>Log Out</button></a>
     </head>
-
     <body>
         <div class="navbar">
             <a href="{{ url_for('BalanceTracking') }}" class="navbar-brand">Balance Tracking</a>
@@ -15,23 +14,23 @@
             <a href="{{ url_for('Budget') }}" class="navbar-item">Budget</a>
             <a href="{{ url_for('Investment') }}" class="navbar-item">Investments</a>
         </div>
-
-        <div class="body-content">
-            {% block content %}
-            {% endblock %}
-            <hr/>
-            <footer>
-                <p>&copy; 2025</p>
-            </footer>
-        </div>
-        <div class="background">
-            <span class="ball"></span>
-            <span class="ball"></span>
-            <span class="ball"></span>
-            <span class="ball"></span>
-            <span class="ball"></span>
-            <span class="ball"></span>
+        <div class="container">
+            <div class="body-content">
+                {% block content %}
+                {% endblock %}
+                <hr/>
+                <footer>
+                    <p>&copy; 2025</p>
+                </footer>
+            </div>
+            <div class="background">
+                <span class="ball"></span>
+                <span class="ball"></span>
+                <span class="ball"></span>
+                <span class="ball"></span>
+                <span class="ball"></span>
+                <span class="ball"></span>
+            </div>
         </div>
     </body>
-
 </html>
