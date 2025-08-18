@@ -520,12 +520,14 @@ def Budget():
         mon = int(currentmon)
         monstr = calendar.month_name[mon]
         y = currentyear
+        y = int(y)
         transactions = transactions[transactions['Year']==y]
         transactions = transactions[transactions['Month']==mon]
     else:
         mon = int(month)
         monstr = calendar.month_name[mon]
         y = year
+        y = int(y)
         transactions = transactions[transactions['Year']==y]
         transactions = transactions[transactions['Month']==mon]
     app.logger.debug(transactions['Month'].dtype)
@@ -568,6 +570,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
