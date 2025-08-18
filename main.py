@@ -89,7 +89,7 @@ def register():
             user = pd.read_sql('SELECT * FROM users.users;',users)
             app.logger.debug(user)
             app.logger.debug(username)
-            if username in user['idusers'].values:
+            if username in user.values:
                 return render_template('RegisterUserTaken.html')
             else:
                 username = username.lower()
@@ -574,6 +574,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
