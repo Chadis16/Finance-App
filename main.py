@@ -499,11 +499,11 @@ def Budget():
     currentyear = today.year
     # curmonstr = calendar.month_name[currentmon]
     transactions = Transact()
-    transactions['Month'] = pd.to_datetime(transactions['Date']).dt.month
-    transactions['Year'] = pd.to_datetime(transactions['Date']).dt.year
-    account = Account()
-    account = pd.DataFrame(account)
-    transactions = pd.merge(transactions,account,on='Account',how='right')
+    # transactions['Month'] = pd.to_datetime(transactions['Date']).dt.month
+    # transactions['Year'] = pd.to_datetime(transactions['Date']).dt.year
+    # account = Account()
+    # account = pd.DataFrame(account)
+    # transactions = pd.merge(transactions,account,on='Account',how='right')
     # transactions = transactions[transactions['Account Type'].isin(['Checking','Credit Card','Savings'])]
     # transactions = transactions.groupby(['Year','Month','Category'])['Amount'].sum()
     # transactions = transactions.to_frame()
