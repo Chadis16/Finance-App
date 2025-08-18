@@ -499,7 +499,7 @@ def Budget():
     currentmon = today.month
     currentyear = today.year
     # curmonstr = calendar.month_name[currentmon]
-    print(username)
+    print(session['username'])
     transactions = Transact()
     # transactions['Month'] = pd.to_datetime(transactions['Date']).dt.month
     # transactions['Year'] = pd.to_datetime(transactions['Date']).dt.year
@@ -564,6 +564,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
