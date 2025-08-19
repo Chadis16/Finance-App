@@ -573,11 +573,11 @@ def Budget():
     transactions['Amount'] = transactions['Amount'].apply(lambda x: f"${x:,.2f}")
     transactions['Budget'] = transactions['Budget'].apply(lambda x: f"${x:,.2f}")
     accttran['Amount'] = accttran['Amount'].apply(lambda x: f"${x:,.2f}")
-    # transactions = transactions.fillna('Total')
+    transactions = transactions.drop(columns=['idbudget'])
+    transactions = transactions.fillna('Total')
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
     accttran = accttran.to_html(escape=False,index=False,table_id='accttran')
-    bud = bud.to_html(escape=False,index=False,table_id='bud')
-    return render_template('budget.html',transactions=transactions,mon=mon,year=y,monstr=monstr,accttran = accttran,income = income,bud=bud)
+    return render_template('budget.html',transactions=transactions,mon=mon,year=y,monstr=monstr,accttran = accttran,income = income)
 
 @app.route('/Investments/')
 def Investment():
