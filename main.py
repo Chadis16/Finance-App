@@ -589,7 +589,7 @@ def Budget():
     accttran['Amount'] = accttran['Amount'].apply(lambda x: f"${x:,.2f}")
     transactions = transactions.drop(columns=['idbudget'])
     transactions = transactions.fillna('Total')
-    transactions = transactions['Category','Amount','Budget','Remaining','Edit']
+    transactions = transactions[['Category','Amount','Budget','Remaining','Edit']]
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
     accttran = accttran.to_html(escape=False,index=False,table_id='accttran')
     return render_template('budget.html',transactions=transactions,mon=mon,year=y,monstr=monstr,accttran = accttran,income = income)
