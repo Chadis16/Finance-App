@@ -578,17 +578,18 @@ def Budget():
     transactions = transactions.fillna(0)
     transactionstot = transactions['Amount'].sum()
     budgettot = transactions['Budget'].sum()
-    transactions['Amount'] = transactions['Amount']*(-1)
-    transactions['Remaining'] = transactions['Budget'] - transactions['Amount']
     transactions['Edit'] = transactions['idbudget'].apply(lambda x: f'<button onclick="editbudget({x},\'{Buded(x)}\')">Edit</button>')
     transactions.loc['Total','Amount'] = transactionstot
     transactions.loc['Total','Budget'] = budgettot
+    transactions['Amount'] = transactions['Amount']*(-1)
+    transactions['Remaining'] = transactions['Budget'] - transactions['Amount']
     transactions['Amount'] = transactions['Amount'].apply(lambda x: f"${x:,.2f}")
     transactions['Budget'] = transactions['Budget'].apply(lambda x: f"${x:,.2f}")
     transactions['Remaining'] = transactions['Remaining'].apply(lambda x: f"${x:,.2f}")
     accttran['Amount'] = accttran['Amount'].apply(lambda x: f"${x:,.2f}")
     transactions = transactions.drop(columns=['idbudget'])
     transactions = transactions.fillna('Total')
+    transactions = transactions['Category','Amount','Budget','Remaining','Edit']
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
     accttran = accttran.to_html(escape=False,index=False,table_id='accttran')
     return render_template('budget.html',transactions=transactions,mon=mon,year=y,monstr=monstr,accttran = accttran,income = income)
