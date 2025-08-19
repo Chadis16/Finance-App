@@ -532,15 +532,8 @@ def Budget():
         y = int(y)
         transactions = transactions[transactions['Year']==y]
         transactions = transactions[transactions['Month']==mon]
-    app.logger.debug(transactions['Month'].dtype)
-    app.logger.debug(transactions['Year'].dtype)
+    transactions = transactions.drop(columns=['Year','Month'])
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
-    app.logger.debug(mon)
-    app.logger.debug(y)
-    app.logger.debug(monstr)
-    app.logger.debug(type(mon))
-    app.logger.debug(type(monstr))
-    app.logger.debug(type(y))
     return render_template('budget.html',transactions=transactions,mon=mon,year=y,monstr=monstr)
 
 @app.route('/Investments/')
