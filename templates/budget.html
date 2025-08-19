@@ -27,6 +27,12 @@ Budget
                 <option value=12>December</option>
     </select>
 </form>
-{{ transactions | safe }}
-{{ accttran | safe }}
+<div class="row">
+    <div class="column">
+        {{ transactions | safe }}
+    </div>
+    <div class="column">
+        {{ accttran | safe }}
+    </div>
+</div>
 {% endblock %}
