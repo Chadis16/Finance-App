@@ -502,6 +502,8 @@ def Budget():
     transactions = Transact()
     transactions['Month'] = pd.to_datetime(transactions['Date']).dt.month
     transactions['Year'] = pd.to_datetime(transactions['Date']).dt.year
+    account = Account()
+    account = pd.DataFrame(account)
     transactions = pd.merge(transactions,account,on='Account',how='right')
     accttran = transactions
     accttran = accttran[accttran['Account Type']=='Credit Card']
@@ -509,9 +511,6 @@ def Budget():
     accttran = accttran.to_frame()
     accttran = accttran.reset_index()
     accttran['Amount'] = accttran['Amount'].apply(lambda x: f"${x:,.2f}")
-    account = Account()
-    account = pd.DataFrame(account)
-    transactions = pd.merge(transactions,account,on='Account',how='right')
     transactions = transactions[transactions['Account Type'].isin(['Checking','Credit Card','Savings'])]
     transactions = transactions.groupby(['Year','Month','Category'])['Amount'].sum()
     transactions = transactions.to_frame()
