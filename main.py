@@ -219,6 +219,13 @@ def Transact():
     finance_app.close()
     return transaction
 
+def Bud():
+    username = session['username']
+    engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
+    finance_app = engine.connect()
+    bud = pd.read_sql('SELECT * from budget;',finance_app)
+    return bud
+
 def Balances():
     transactions = Transact()
     balance = transactions.groupby('Account')['Amount'].sum()
@@ -498,8 +505,10 @@ def tranupload():
 
 @app.route('/Budget', methods=['POST','GET'])
 def Budget():
+    username = session['username']
     year = request.form.get('Year')
     month = request.form.get('Month')
+    bud = Bud()
     income = 0
     today = date.today()
     currentmon = today.month
@@ -562,7 +571,7 @@ def Budget():
     accttran = accttran.drop(columns=['Year','Month'])
     accttran = accttran.fillna('Total')
     accttran = accttran.to_html(escape=False,index=False,table_id='accttran')
-    return render_template('budget.html',transactions=transactions,mon=mon,year=y,monstr=monstr,accttran = accttran,income = income)
+    return render_template('budget.html',transactions=transactions,mon=mon,year=y,monstr=monstr,accttran = accttran,income = income,bud=bud)
 
 @app.route('/Investments/')
 def Investment():
@@ -593,32 +602,4 @@ def Investment():
     return render_template('Investments.html',investment = investments)
 
 if __name__ == '__main__':
-
     app.run(host='0.0.0.0')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
