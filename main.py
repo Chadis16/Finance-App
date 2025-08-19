@@ -506,7 +506,7 @@ def tranupload():
 def Buded(x):
     Buds = Bud()
     Buds = Buds[Buds['idbudget']==x]
-    Buds = Buds.iat[0,3]
+    Buds = Buds.iat[0,1]
     return Buds
 
 
