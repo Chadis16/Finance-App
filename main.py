@@ -547,6 +547,7 @@ def Budget():
     transactions = transactions.drop(columns=['Year','Month'])
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
     accttran = accttran.drop(columns=['Year','Month'])
+    accttran = accttran.fillna('Total')
     accttran = accttran.to_html(escape=False,index=False,table_id='accttran')
     return render_template('budget.html',transactions=transactions,mon=mon,year=y,monstr=monstr,accttran = accttran)
 
