@@ -511,7 +511,8 @@ def Budget():
     accttran = accttran.groupby(['Year','Month','Account'])['Amount'].sum()
     accttran = accttran.to_frame()
     accttran = accttran.reset_index()
-    accttran.loc['Total'] = accttran.sum()
+    accttrantot = accttran['Amount'].sum()
+    accttran.loc['Total','Amount'] = accttrantot
     accttran['Amount'] = accttran['Amount'].apply(lambda x: f"${x:,.2f}")
     transactions = transactions[transactions['Account Type'].isin(['Checking','Credit Card','Savings'])]
     transactions = transactions.groupby(['Year','Month','Category'])['Amount'].sum()
@@ -545,7 +546,7 @@ def Budget():
         accttran = accttran[accttran['Month']==mon]
     transactions = transactions.drop(columns=['Year','Month'])
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
-    accttran = accttran.to_html(escape=False,table_id='accttran')
+    accttran = accttran.to_html(escape=False,index=False,table_id='accttran')
     return render_template('budget.html',transactions=transactions,mon=mon,year=y,monstr=monstr,accttran = accttran)
 
 @app.route('/Investments/')
