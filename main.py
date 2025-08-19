@@ -570,8 +570,11 @@ def Budget():
     budgettot = transactions['Budget'].sum()
     transactions.loc['Total','Amount'] = transactionstot
     transactions.loc['Total','Budget'] = budgettot
+    transactions['Amount'] = transactions['Amount']*(-1)
+    transactions['Remaining'] = transactions['Budget'] - transactions['Amount']
     transactions['Amount'] = transactions['Amount'].apply(lambda x: f"${x:,.2f}")
     transactions['Budget'] = transactions['Budget'].apply(lambda x: f"${x:,.2f}")
+    transactions['Remaining'] = transactions['Remaining'].apply(lambda x: f"${x:,.2f}")
     accttran['Amount'] = accttran['Amount'].apply(lambda x: f"${x:,.2f}")
     transactions = transactions.drop(columns=['idbudget'])
     transactions = transactions.fillna('Total')
