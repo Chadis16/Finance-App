@@ -576,7 +576,7 @@ def Budget():
     transactions['Budget'] = transactions['Budget'].apply(lambda x: f"${x:,.2f}")
     transactions['Remaining'] = transactions['Remaining'].apply(lambda x: f"${x:,.2f}")
     accttran['Amount'] = accttran['Amount'].apply(lambda x: f"${x:,.2f}")
-    table['Edit'] = table['idbudget'].apply(lambda x: f'<button>Edit</button>')
+    transactions['Edit'] = transactions['idbudget'].apply(lambda x: f'<button>Edit</button>')
     transactions = transactions.drop(columns=['idbudget'])
     transactions = transactions.fillna('Total')
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
