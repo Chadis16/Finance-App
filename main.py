@@ -571,6 +571,7 @@ def Budget():
     transactions.loc['Total','Amount'] = transactionstot
     transactions.loc['Total','Budget'] = budgettot
     transactions['Amount'] = transactions['Amount'].apply(lambda x: f"${x:,.2f}")
+    transactions['Budget'] = transactions['Budget'].apply(lambda x: f"${x:,.2f}")
     accttran['Amount'] = accttran['Amount'].apply(lambda x: f"${x:,.2f}")
     # transactions = transactions.fillna('Total')
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
