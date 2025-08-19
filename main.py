@@ -505,7 +505,9 @@ def tranupload():
 
 def Buded(x):
     Buds = Bud()
+    app.logger.debug(Buds)
     Buds = Buds[Buds['idbudget']==x]
+    app.logger.debug(Buds)
     Buds = Buds.iat[0,1]
     return Buds
 
