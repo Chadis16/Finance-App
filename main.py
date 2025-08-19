@@ -511,15 +511,11 @@ def Budget():
     accttran = accttran.groupby(['Year','Month','Account'])['Amount'].sum()
     accttran = accttran.to_frame()
     accttran = accttran.reset_index()
-    accttrantot = accttran['Amount'].sum()
-    accttran.loc['Total','Amount'] = accttrantot
-    accttran['Amount'] = accttran['Amount'].apply(lambda x: f"${x:,.2f}")
     transactions = transactions[transactions['Account Type'].isin(['Checking','Credit Card','Savings'])]
     transactions = transactions.groupby(['Year','Month','Category'])['Amount'].sum()
     transactions = transactions.to_frame()
     transactions = transactions.reset_index()
     transactions['Amount'] = transactions['Amount'].round(2)
-    transactions['Amount'] = transactions['Amount'].apply(lambda x: f"${x:,.2f}")
     transactions = transactions[transactions['Category'].isin(['Bars/Alcohol','Car Payment','Coffee','Fast Food',
                                                                 'Grocieries','Insurance','Interest','Internet',
                                                                 'Loan Payment','Misc','Rent','Restaraunts','Shopping',
@@ -544,8 +540,13 @@ def Budget():
         transactions = transactions[transactions['Month']==mon]
         accttran = accttran[accttran['Year']==y]
         accttran = accttran[accttran['Month']==mon]
+    accttrantot = accttran['Amount'].sum()
+    accttran.loc['Total','Amount'] = accttrantot
+    transactions['Amount'] = transactions['Amount'].apply(lambda x: f"${x:,.2f}")
+    accttran['Amount'] = accttran['Amount'].apply(lambda x: f"${x:,.2f}")
     transactions = transactions.drop(columns=['Year','Month'])
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
+    accttran = accttran.drop(columns=['Year','Month'])
     accttran = accttran.to_html(escape=False,index=False,table_id='accttran')
     return render_template('budget.html',transactions=transactions,mon=mon,year=y,monstr=monstr,accttran = accttran)
 
