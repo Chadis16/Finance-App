@@ -511,6 +511,7 @@ def Budget():
     accttran = accttran.groupby(['Year','Month','Account'])['Amount'].sum()
     accttran = accttran.to_frame()
     accttran = accttran.reset_index()
+    accttran.loc['Total'] = accttran.sum()
     accttran['Amount'] = accttran['Amount'].apply(lambda x: f"${x:,.2f}")
     transactions = transactions[transactions['Account Type'].isin(['Checking','Credit Card','Savings'])]
     transactions = transactions.groupby(['Year','Month','Category'])['Amount'].sum()
