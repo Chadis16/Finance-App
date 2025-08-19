@@ -562,15 +562,17 @@ def Budget():
     accttrantot = accttran['Amount'].sum()
     accttran.loc['Total','Amount'] = accttrantot
     transactions = transactions.drop(columns=['Year','Month'])
-    transactions = transactions.fillna('Total')
     accttran = accttran.drop(columns=['Year','Month'])
     accttran = accttran.fillna('Total')
     transactions = pd.merge(transactions,bud,on='Category',how='right')
     transactions = transactions.fillna(0)
     transactionstot = transactions['Amount'].sum()
+    budgettot = transactions['Budget'].sum()
     transactions.loc['Total','Amount'] = transactionstot
+    transactions.loc['Total','Budget'] = budgettot
     transactions['Amount'] = transactions['Amount'].apply(lambda x: f"${x:,.2f}")
     accttran['Amount'] = accttran['Amount'].apply(lambda x: f"${x:,.2f}")
+    # transactions = transactions.fillna('Total')
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
     accttran = accttran.to_html(escape=False,index=False,table_id='accttran')
     bud = bud.to_html(escape=False,index=False,table_id='bud')
