@@ -504,10 +504,10 @@ def tranupload():
         return redirect(url_for('Transactions'))
 
 def Buded(x):
-    Bud = Bud()
-    Bud = Bud[Bud['idbudget']==x]
-    Bud = Bud.iat[0,3]
-    return Bud
+    Buds = Bud()
+    Buds = Buds[Buds['idbudget']==x]
+    Buds = Buds.iat[0,3]
+    return Buds
 
 
 @app.route('/Budget', methods=['POST','GET'])
