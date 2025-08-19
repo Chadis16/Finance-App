@@ -3,6 +3,10 @@
 Budget
 {% endblock %}
 {% block content %}
+<form>
+    <p>Monthly Income: {{ income }}</p>
+    <button>Edit</button>
+</form>
 <form method="POST">
     <select name="Year" id="Year" onchange="this.form.submit()">
                 <option value="{{ year }}">{{ year }}</option>
@@ -27,7 +31,6 @@ Budget
                 <option value=12>December</option>
     </select>
 </form>
-<p>Income: {{ income }}</p>
 <div class="row">
     <div class="column">
         {{ transactions | safe }}
