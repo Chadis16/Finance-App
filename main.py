@@ -496,6 +496,7 @@ def tranupload():
 def Budget():
     year = request.form.get('Year')
     month = request.form.get('Month')
+    income = request.form.get('Income')
     today = date.today()
     currentmon = today.month
     currentyear = today.year
@@ -522,6 +523,11 @@ def Budget():
                                                                 'Streaming','Travel','Utilities'])]
     years = transactions['Year'].unique()
     years = np.sort(years)
+    if income is None:
+        income = 0
+    else:
+        income = income
+    income = f"${income:,.2f}"
     if year is None:
         mon = int(currentmon)
         monstr = calendar.month_name[mon]
@@ -552,7 +558,7 @@ def Budget():
     accttran = accttran.drop(columns=['Year','Month'])
     accttran = accttran.fillna('Total')
     accttran = accttran.to_html(escape=False,index=False,table_id='accttran')
-    return render_template('budget.html',transactions=transactions,mon=mon,year=y,monstr=monstr,accttran = accttran)
+    return render_template('budget.html',transactions=transactions,mon=mon,year=y,monstr=monstr,accttran = accttran,income = income)
 
 @app.route('/Investments/')
 def Investment():
