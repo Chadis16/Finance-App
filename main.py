@@ -578,6 +578,7 @@ def Budget():
     transactions = transactions.fillna(0)
     transactionstot = transactions['Amount'].sum()
     budgettot = transactions['Budget'].sum()
+    transactions['Edit'] = transactions['idbudget'].apply(lambda x: f'<button onclick="editbudget({x},\'{Buded(x)}\')">Edit</button>')
     transactions.loc['Total','Amount'] = transactionstot
     transactions.loc['Total','Budget'] = budgettot
     transactions['Amount'] = transactions['Amount']*(-1)
@@ -586,7 +587,6 @@ def Budget():
     transactions['Budget'] = transactions['Budget'].apply(lambda x: f"${x:,.2f}")
     transactions['Remaining'] = transactions['Remaining'].apply(lambda x: f"${x:,.2f}")
     accttran['Amount'] = accttran['Amount'].apply(lambda x: f"${x:,.2f}")
-    transactions['Edit'] = transactions['idbudget'].apply(lambda x: f'<button onclick="editbudget({x},\'{Buded(x)}\')">Edit</button>')
     transactions = transactions.drop(columns=['idbudget'])
     transactions = transactions.fillna('Total')
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
