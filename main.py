@@ -529,6 +529,8 @@ def Budget():
         y = int(y)
         transactions = transactions[transactions['Year']==y]
         transactions = transactions[transactions['Month']==mon]
+        accttran = accttran[accttran['Year']==y]
+        accttran = accttran[accttran['Month']==mon]
     else:
         mon = int(month)
         monstr = calendar.month_name[mon]
@@ -536,6 +538,8 @@ def Budget():
         y = int(y)
         transactions = transactions[transactions['Year']==y]
         transactions = transactions[transactions['Month']==mon]
+        accttran = accttran[accttran['Year']==y]
+        accttran = accttran[accttran['Month']==mon]
     transactions = transactions.drop(columns=['Year','Month'])
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
     accttran = accttran.to_html(escape=False,index=False,table_id='accttran')
