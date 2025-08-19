@@ -503,6 +503,13 @@ def tranupload():
         finance_app.close()
         return redirect(url_for('Transactions'))
 
+def Buded(x):
+    Bud = Bud()
+    Bud = Bud[Bud['idbudget']==x]
+    Bud = Bud.iat[0,3]
+    return Bud
+
+
 @app.route('/Budget', methods=['POST','GET'])
 def Budget():
     username = session['username']
@@ -576,7 +583,7 @@ def Budget():
     transactions['Budget'] = transactions['Budget'].apply(lambda x: f"${x:,.2f}")
     transactions['Remaining'] = transactions['Remaining'].apply(lambda x: f"${x:,.2f}")
     accttran['Amount'] = accttran['Amount'].apply(lambda x: f"${x:,.2f}")
-    transactions['Edit'] = transactions['idbudget'].apply(lambda x: f'<button>Edit</button>')
+    transactions['Edit'] = transactions['idbudget'].apply(lambda x: f'<button onclick="editbudget({x},\'{Buded(x,'Budget')}\')">Edit</button>')
     transactions = transactions.drop(columns=['idbudget'])
     transactions = transactions.fillna('Total')
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
