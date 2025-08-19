@@ -540,11 +540,14 @@ def Budget():
         transactions = transactions[transactions['Month']==mon]
         accttran = accttran[accttran['Year']==y]
         accttran = accttran[accttran['Month']==mon]
+    transactionstot = transactions['Amount'].sum()
+    transactions.loc['Total','Amount'] = transactionstot
     accttrantot = accttran['Amount'].sum()
     accttran.loc['Total','Amount'] = accttrantot
     transactions['Amount'] = transactions['Amount'].apply(lambda x: f"${x:,.2f}")
     accttran['Amount'] = accttran['Amount'].apply(lambda x: f"${x:,.2f}")
     transactions = transactions.drop(columns=['Year','Month'])
+    transactions = transactions.fillna('Total')
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
     accttran = accttran.drop(columns=['Year','Month'])
     accttran = accttran.fillna('Total')
