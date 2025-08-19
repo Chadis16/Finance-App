@@ -3,17 +3,16 @@
 Budget
 {% endblock %}
 {% block content %}
-<form>
+<div>
     <p>Monthly Income: {{ income }}</p>
     <button>Edit</button>
-</form>
+</div>
 <form method="POST">
     <select name="Year" id="Year" onchange="this.form.submit()">
                 <option value="{{ year }}">{{ year }}</option>
                 {% for years in years %}
                 <option value="{{ years }}">{{ years }}</option>
                 {% endfor %}
-
     </select>
     <select name="Month" id="Month" onchange="this.form.submit()">
                 <option value="{{ mon }}">{{ monstr }}</option>
