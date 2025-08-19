@@ -113,6 +113,10 @@ def register():
                 categories = ['Bars/Alcohol','Car Payment','Cash','CC Payment','CC Rewards','Coffee','Education','Fast Food','Grocieries','Insurance','Interest','Internet','Loan Payment','Medical','Misc','Paycheck','Phone','Refund/Rebate','Rent','Restaraunts','Shopping','Starting Balance','Streaming','Subscriptions','Transfer','Travel','Utilities','Taxes','Investment','Dividend','ATM','Pets']
                 for i in categories:
                     finance_app.execute(text(f"""INSERT INTO {username}.`categories` (`Category`) VALUES ('{i}');"""))
+                finance_app.execute(text(f"""CREATE TABLE {username}.`budget` (`idbudget` INT NOT NULL AUTO_INCREMENT,`Category` VARCHAR(45) NOT NULL,`Budget` FLOAT NOT NULL DEFAULT 0,PRIMARY KEY (`idbudget`),UNIQUE INDEX 'idbudget_UNIQUE' (`idbudget` ASC) VISIBLE, UNIQUE INDEX `Category_UNIQUE` (`Category` ASC) VISIBLE);"""))
+                budcat = ['Income','Bars/Alcohol','Car Payment','Coffee','Education','Fast Food','Grocieries','Insurance','Internet','Loan Payment','Medical','Phone','Rent','Restaraunts','Shopping','Streaming','Subscriptions','Travel','Utilities','Pets']
+                for i in budcat:
+                    finance_app.execute(text(f"""INSERT INTO {username}.'budget' ('Category') VALUES ('{i}');"""))
                 finance_app.execute(text(f"""INSERT INTO {username}.`transactions` (`Date`, `Transaction`, `Amount`, `Category`, `Account`) VALUES ('2025-01-01', 'Temp', '0.00', 'Misc', 'Temp');"""))
                 finance_app.commit()
                 users.close()
@@ -496,7 +500,7 @@ def tranupload():
 def Budget():
     year = request.form.get('Year')
     month = request.form.get('Month')
-    income = request.form.get('Income')
+    income = 0
     today = date.today()
     currentmon = today.month
     currentyear = today.year
