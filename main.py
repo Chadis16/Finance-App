@@ -499,10 +499,10 @@ def Budget():
     today = date.today()
     currentmon = today.month
     currentyear = today.year
-    # curmonstr = calendar.month_name[currentmon]
     transactions = Transact()
     transactions['Month'] = pd.to_datetime(transactions['Date']).dt.month
     transactions['Year'] = pd.to_datetime(transactions['Date']).dt.year
+    accttran = transactions
     account = Account()
     account = pd.DataFrame(account)
     transactions = pd.merge(transactions,account,on='Account',how='right')
@@ -534,7 +534,7 @@ def Budget():
         transactions = transactions[transactions['Month']==mon]
     transactions = transactions.drop(columns=['Year','Month'])
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
-    return render_template('budget.html',transactions=transactions,mon=mon,year=y,monstr=monstr)
+    return render_template('budget.html',transactions=transactions,mon=mon,year=y,monstr=monstr,accttran = accttran)
 
 @app.route('/Investments/')
 def Investment():
