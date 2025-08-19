@@ -569,6 +569,7 @@ def Budget():
     transactions = transactions.fillna('Total')
     accttran = accttran.drop(columns=['Year','Month'])
     accttran = accttran.fillna('Total')
+    transactions = pd.merge(transactions,bud,on='Category',how='right')
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
     accttran = accttran.to_html(escape=False,index=False,table_id='accttran')
     bud = bud.to_html(escape=False,index=False,table_id='bud')
