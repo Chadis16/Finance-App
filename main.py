@@ -348,6 +348,7 @@ def rectran():
 
 @app.route('/recurringtrandel/', methods=['POST'])
 def rectrandel():
+    username = session['username']
     engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
     finance_app = engine.connect()
     if request.method == 'POST':
