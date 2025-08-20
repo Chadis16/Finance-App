@@ -224,6 +224,7 @@ def Bud():
     engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
     finance_app = engine.connect()
     bud = pd.read_sql('SELECT * from budget;',finance_app)
+    finance_app.close()
     return bud
 
 def Balances():
@@ -504,11 +505,8 @@ def tranupload():
         return redirect(url_for('Transactions'))
 
 def Buded(x):
-    app.logger.debug(x)
     Buds = Bud()
-    app.logger.debug(Buds)
     Buds = Buds[Buds['idbudget']==x]
-    app.logger.debug(Buds)
     Buds = Buds.iat[0,1]
     return Buds
 
@@ -623,4 +621,5 @@ def Investment():
     return render_template('Investments.html',investment = investments)
 
 if __name__ == '__main__':
+
     app.run(host='0.0.0.0')
