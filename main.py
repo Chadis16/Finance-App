@@ -545,6 +545,8 @@ def Budget():
                                                                 'Streaming','Travel','Utilities'])]
     years = transactions['Year'].unique()
     years = np.sort(years)
+    monbud = budgettot
+    remaining = income - monbud
     if income is None:
         income = 0
     else:
@@ -578,8 +580,6 @@ def Budget():
     transactions = transactions.fillna(0)
     transactionstot = transactions['Amount'].sum()
     budgettot = transactions['Budget'].sum()
-    monbud = budgettot
-    remaining = income - monbud
     monbud = f"${monbud:,.2f}"
     remaining = f"${remaining:,.2f}"
     transactions['Edit'] = transactions['idbudget'].apply(lambda x: f'<button onclick="editbudget({x},\'{Buded(x)}\')">Edit</button>')
