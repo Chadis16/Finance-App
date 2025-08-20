@@ -31,6 +31,10 @@ Budget
     <label for="Edit">Monthly Income: {{ income }}</label>
     <button id="Edit" name="Edit">Edit</button>
 </div>
+<div>
+    <p>Monthly Budget: {{ monbud }}</p>
+    <p>Remaining: {{ remaining }}</p>
+</div>
 <form method="POST">
     <select name="Year" id="Year" onchange="this.form.submit()">
                 <option value="{{ year }}">{{ year }}</option>

@@ -578,6 +578,10 @@ def Budget():
     transactions = transactions.fillna(0)
     transactionstot = transactions['Amount'].sum()
     budgettot = transactions['Budget'].sum()
+    monbud = budgettot
+    remaining = income - monbud
+    monbud = f"${monbud:,.2f}"
+    remaining = f"${remaining:,.2f}"
     transactions['Edit'] = transactions['idbudget'].apply(lambda x: f'<button onclick="editbudget({x},\'{Buded(x)}\')">Edit</button>')
     transactions.loc['Total','Amount'] = transactionstot
     transactions.loc['Total','Budget'] = budgettot
@@ -592,7 +596,7 @@ def Budget():
     transactions = transactions[['Category','Amount','Budget','Remaining','Edit']]
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
     accttran = accttran.to_html(escape=False,index=False,table_id='accttran')
-    return render_template('budget.html',transactions=transactions,mon=mon,year=y,monstr=monstr,accttran = accttran,income = income)
+    return render_template('budget.html',transactions=transactions,mon=mon,year=y,monstr=monstr,accttran = accttran,income = income,monbud = monbud,remaining=remaining)
 
 @app.route('/editbudget/', methods=['POST','GET'])
 def editbudget():
