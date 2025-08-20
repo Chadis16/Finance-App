@@ -113,7 +113,7 @@ def register():
                 categories = ['Bars/Alcohol','Car Payment','Cash','CC Payment','CC Rewards','Coffee','Education','Fast Food','Grocieries','Insurance','Interest','Internet','Loan Payment','Medical','Misc','Paycheck','Phone','Refund/Rebate','Rent','Restaraunts','Shopping','Starting Balance','Streaming','Subscriptions','Transfer','Travel','Utilities','Taxes','Investment','Dividend','ATM','Pets']
                 for i in categories:
                     finance_app.execute(text(f"""INSERT INTO {username}.`categories` (`Category`) VALUES ('{i}');"""))
-                finance_app.execute(text(f"""CREATE TABLE {username}.`budget` (`idbudget` INT NOT NULL AUTO_INCREMENT,`Category` VARCHAR(45) NOT NULL,`Budget` FLOAT NOT NULL DEFAULT 0,PRIMARY KEY (`idbudget`),UNIQUE INDEX 'idbudget_UNIQUE' (`idbudget` ASC) VISIBLE);"""))
+                finance_app.execute(text(f"""CREATE TABLE {username}.`budget` (`idbudget` INT NOT NULL AUTO_INCREMENT,`Category` VARCHAR(45) NOT NULL,`Budget` FLOAT NOT NULL DEFAULT 0,`budgetcol` VARCHAR(45) NULL,PRIMARY KEY (`idbudget`));"""))
                 budcat = ['Income','Bars/Alcohol','Car Payment','Coffee','Education','Fast Food','Grocieries','Insurance','Internet','Loan Payment','Medical','Phone','Rent','Restaraunts','Shopping','Streaming','Subscriptions','Travel','Utilities','Pets']
                 for i in budcat:
                     finance_app.execute(text(f"""INSERT INTO {username}.'budget' ('Category') VALUES ('{i}');"""))
@@ -623,4 +623,5 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
