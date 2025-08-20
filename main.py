@@ -592,6 +592,22 @@ def Budget():
     accttran = accttran.to_html(escape=False,index=False,table_id='accttran')
     return render_template('budget.html',transactions=transactions,mon=mon,year=y,monstr=monstr,accttran = accttran,income = income)
 
+@app.route('/editbudget', methods=['POST','GET'])
+def editbudget():
+    username = session['username']
+    engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
+    finance_app = engine.connect()
+    if request.method=='POST':
+        ID = request.form.get('ID')
+        budget = request.form.get('Budget')
+        app.logger.debug(ID)
+        app.logger.debug(budget)
+        finance_app.execute(text(f"""UPDATE {username}.`budget` SET `Budget` = :Budget WHERE (`idbudget` = :ID);"""),
+                         {'ID':ID,'Budget':budget})
+        finance_app.commit()
+        finance_app.close()
+        return redirect(url_for('Budget'))
+
 @app.route('/Investments/')
 def Investment():
     investments = investment_transactions.groupby(['Account','Ticker'])['Quantity'].sum()
