@@ -8,7 +8,7 @@ Budget
         <h2>Monthly Income</h2>
         <form method="POST" action="/editincome/">
             <label class="form-label" for="Income">Income</label>
-            <input class="form-input" type="number" value={{ income }} id="Income" name="Income" step="0.01" required>
+            <input class="form-input" type="number" value="{{ income }}" id="Income" name="Income" step="0.01" required>
             <button type="submit">Submit</button>
         </form>
         <button onclick="closepopup()" style="margin-top: 10px; padding:5px 10px; background-color: #dc3545; color: #fff; border: none; border-radius: 3px;">Close</button>
@@ -64,8 +64,7 @@ Budget
     </div>
 </div>
 <script type="text/javascript">
-    function editincome(ID,Income) {
-        document.getElementById('ID').value = ID;
+    function editincome(Income) {
         document.getElementById('Income').value = Income;
         document.getElementById('popup1').style.display = 'flex';
     }
