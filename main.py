@@ -593,7 +593,7 @@ def Budget():
     accttran = accttran.to_html(escape=False,index=False,table_id='accttran')
     return render_template('budget.html',transactions=transactions,mon=mon,year=y,monstr=monstr,accttran = accttran,income = income)
 
-@app.route('/editbudget', methods=['POST','GET'])
+@app.route('/editbudget/', methods=['POST','GET'])
 def editbudget():
     username = session['username']
     engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
