@@ -28655,3 +28655,184 @@ Traceback (most recent call last):
 sqlalchemy.exc.ProgrammingError: (mysql.connector.errors.ProgrammingError) 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''idbudget_UNIQUE' (`idbudget` ASC) VISIBLE, UNIQUE INDEX `Category_UNIQUE` (`Cat' at line 1
 [SQL: CREATE TABLE jwintin.`budget` (`idbudget` INT NOT NULL AUTO_INCREMENT,`Category` VARCHAR(45) NOT NULL,`Budget` FLOAT NOT NULL DEFAULT 0,PRIMARY KEY (`idbudget`),UNIQUE INDEX 'idbudget_UNIQUE' (`idbudget` ASC) VISIBLE, UNIQUE INDEX `Category_UNIQUE` (`Category` ASC) VISIBLE);]
 (Background on this error at: https://sqlalche.me/e/20/f405)
+INFO:sqlalchemy.engine.Engine:SELECT DATABASE()
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT @@sql_mode
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT @@lower_case_table_names
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT DATABASE()
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT @@sql_mode
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT @@lower_case_table_names
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.Engine:DESCRIBE `users`.`SELECT * FROM users.users;`
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT * FROM users.users;
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+DEBUG:main:   idusers   Username                                           Password
+0       21  chadmoore  $argon2id$v=19$m=65536,t=3,p=4$3nwsnpg3aB3S/dt...
+1       22      test1  $argon2id$v=19$m=65536,t=3,p=4$Nrq1BaDr+B2Kqa8...
+2       23     jimbob  $argon2id$v=19$m=65536,t=3,p=4$lughnscaMcVuHAD...
+3       24   adoggett  $argon2id$v=19$m=65536,t=3,p=4$1jSfmzchn/mfco2...
+4       31    jwintin  $argon2id$v=19$m=65536,t=3,p=4$mixjr1U5MpdnzZG...
+DEBUG:main:jointwin
+INFO:sqlalchemy.engine.Engine:INSERT INTO `users`.`users` (`Username`, `Password`) VALUES (%(Username)s, %(Password)s)
+INFO:sqlalchemy.engine.Engine:[generated in 0.00053s] {'Username': 'jointwin', 'Password': '$argon2id$v=19$m=65536,t=3,p=4$kxyxDo0Ni3YrUcv/tYCHLQ$Cio893zm+3OWcV4j68iQyKvzFVTzv4ZCG+EHPZ4vO0w'}
+INFO:sqlalchemy.engine.Engine:COMMIT
+INFO:sqlalchemy.engine.Engine:SELECT DATABASE()
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT @@sql_mode
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:SELECT @@lower_case_table_names
+INFO:sqlalchemy.engine.Engine:[raw sql] {}
+INFO:sqlalchemy.engine.Engine:BEGIN (implicit)
+INFO:sqlalchemy.engine.Engine:CREATE TABLE jointwin.`accounts` (`idaccounts` INT NOT NULL AUTO_INCREMENT,`Account` VARCHAR(45) NOT NULL,`Account Type` VARCHAR(45) NOT NULL,PRIMARY KEY (`idaccounts`),UNIQUE INDEX `Account_UNIQUE` (`Account` ASC) VISIBLE);
+INFO:sqlalchemy.engine.Engine:[generated in 0.00031s] {}
+INFO:sqlalchemy.engine.Engine:CREATE TABLE jointwin.`categories` (`idcategories` INT NOT NULL AUTO_INCREMENT,`Category` VARCHAR(45) NOT NULL,PRIMARY KEY (`idcategories`),UNIQUE INDEX `Category_UNIQUE` (`Category` ASC) VISIBLE);
+INFO:sqlalchemy.engine.Engine:[generated in 0.00033s] {}
+INFO:sqlalchemy.engine.Engine:CREATE TABLE jointwin.`investment transactions` (`idinvestment transactions` INT NOT NULL AUTO_INCREMENT,`Date` DATE NOT NULL,`Transaction` VARCHAR(45) NOT NULL,`Ticker` VARCHAR(45) NOT NULL,`Quantity` FLOAT NULL DEFAULT NULL,`Price` FLOAT NULL DEFAULT NULL,`Amount` FLOAT NOT NULL,`Account` VARCHAR(45) NOT NULL,PRIMARY KEY (`idinvestment transactions`));
+INFO:sqlalchemy.engine.Engine:[generated in 0.00036s] {}
+INFO:sqlalchemy.engine.Engine:CREATE TABLE jointwin.`investment_accounts` (`idinvestment_accounts` INT NOT NULL AUTO_INCREMENT,`Account` VARCHAR(45) NOT NULL,`Account Type` VARCHAR(45) NOT NULL,PRIMARY KEY (`idinvestment_accounts`),UNIQUE INDEX `Account_UNIQUE` (`Account` ASC) VISIBLE);
+INFO:sqlalchemy.engine.Engine:[generated in 0.00039s] {}
+INFO:sqlalchemy.engine.Engine:CREATE TABLE jointwin.`recurring_transactions` (`idrecurring_transactions` INT NOT NULL AUTO_INCREMENT,`Bill` VARCHAR(45) NOT NULL,`Frequency` VARCHAR(45) NOT NULL,`Start_Date` DATE NOT NULL,`Amount` FLOAT NOT NULL,`Account` VARCHAR(45) NOT NULL,PRIMARY KEY (`idrecurring_transactions`));
+INFO:sqlalchemy.engine.Engine:[generated in 0.00040s] {}
+INFO:sqlalchemy.engine.Engine:CREATE TABLE jointwin.`transactions` (`idtransactions` INT NOT NULL AUTO_INCREMENT,`Date` DATE NOT NULL,`Transaction` VARCHAR(45) NOT NULL,`Amount` FLOAT NOT NULL DEFAULT '0',`Category` VARCHAR(45) NOT NULL,`Account` VARCHAR(45) NOT NULL,PRIMARY KEY (`idtransactions`));
+INFO:sqlalchemy.engine.Engine:[generated in 0.00035s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Bars/Alcohol');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00035s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Car Payment');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00027s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Cash');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00050s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('CC Payment');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00027s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('CC Rewards');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00080s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Coffee');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00024s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Education');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00022s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Fast Food');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00024s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Grocieries');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00027s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Insurance');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00075s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Interest');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00021s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Internet');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00021s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Loan Payment');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00020s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Medical');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00020s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Misc');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00026s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Paycheck');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00079s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Phone');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00020s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Refund/Rebate');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00021s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Rent');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00019s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Restaraunts');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00025s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Shopping');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00021s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Starting Balance');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00023s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Streaming');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00049s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Subscriptions');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00029s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Transfer');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00025s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Travel');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00023s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Utilities');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00021s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Taxes');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00021s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Investment');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00024s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Dividend');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00022s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('ATM');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00049s] {}
+INFO:sqlalchemy.engine.Engine:INSERT INTO jointwin.`categories` (`Category`) VALUES ('Pets');
+INFO:sqlalchemy.engine.Engine:[generated in 0.00025s] {}
+INFO:sqlalchemy.engine.Engine:CREATE TABLE jointwin.`budget` (`idbudget` INT NOT NULL AUTO_INCREMENT,`Category` VARCHAR(45) NOT NULL,`Budget` FLOAT NOT NULL DEFAULT 0,PRIMARY KEY (`idbudget`),UNIQUE INDEX 'idbudget_UNIQUE' (`idbudget` ASC) VISIBLE);
+INFO:sqlalchemy.engine.Engine:[generated in 0.00061s] {}
+ERROR:main:Exception on /Register [POST]
+Traceback (most recent call last):
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/mysql/connector/connection_cext.py", line 772, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''idbudget_UNIQUE' (`idbudget` ASC) VISIBLE)' at line 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 951, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/mysql/connector/cursor_cext.py", line 353, in execute
+    self._connection.cmd_query(
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/mysql/connector/opentelemetry/context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/mysql/connector/connection_cext.py", line 781, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.ProgrammingError: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''idbudget_UNIQUE' (`idbudget` ASC) VISIBLE)' at line 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/main.py", line 116, in register
+    finance_app.execute(text(f"""CREATE TABLE {username}.`budget` (`idbudget` INT NOT NULL AUTO_INCREMENT,`Category` VARCHAR(45) NOT NULL,`Budget` FLOAT NOT NULL DEFAULT 0,PRIMARY KEY (`idbudget`),UNIQUE INDEX 'idbudget_UNIQUE' (`idbudget` ASC) VISIBLE);"""))
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 951, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/mysql/connector/cursor_cext.py", line 353, in execute
+    self._connection.cmd_query(
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/mysql/connector/opentelemetry/context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/financeapp/financeappenv/lib/python3.12/site-packages/mysql/connector/connection_cext.py", line 781, in cmd_query
+    raise get_mysql_exception(
+sqlalchemy.exc.ProgrammingError: (mysql.connector.errors.ProgrammingError) 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''idbudget_UNIQUE' (`idbudget` ASC) VISIBLE)' at line 1
+[SQL: CREATE TABLE jointwin.`budget` (`idbudget` INT NOT NULL AUTO_INCREMENT,`Category` VARCHAR(45) NOT NULL,`Budget` FLOAT NOT NULL DEFAULT 0,PRIMARY KEY (`idbudget`),UNIQUE INDEX 'idbudget_UNIQUE' (`idbudget` ASC) VISIBLE);]
+(Background on this error at: https://sqlalche.me/e/20/f405)
