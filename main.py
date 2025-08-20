@@ -545,13 +545,10 @@ def Budget():
                                                                 'Streaming','Travel','Utilities'])]
     years = transactions['Year'].unique()
     years = np.sort(years)
-    monbud = budgettot
-    remaining = income - monbud
     if income is None:
         income = 0
     else:
         income = income
-    income = f"${income:,.2f}"
     if year is None:
         mon = int(currentmon)
         monstr = calendar.month_name[mon]
@@ -580,6 +577,9 @@ def Budget():
     transactions = transactions.fillna(0)
     transactionstot = transactions['Amount'].sum()
     budgettot = transactions['Budget'].sum()
+    monbud = budgettot
+    remaining = income - monbud
+    income = f"${income:,.2f}"
     monbud = f"${monbud:,.2f}"
     remaining = f"${remaining:,.2f}"
     transactions['Edit'] = transactions['idbudget'].apply(lambda x: f'<button onclick="editbudget({x},\'{Buded(x)}\')">Edit</button>')
