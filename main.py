@@ -519,7 +519,7 @@ def Budget():
     year = request.form.get('Year')
     month = request.form.get('Month')
     bud = Bud()
-    income = 0
+    income = bud.iat[1,2]
     today = date.today()
     currentmon = today.month
     currentyear = today.year
@@ -607,10 +607,21 @@ def editbudget():
     if request.method=='POST':
         ID = request.form.get('I')
         budget = request.form.get('Budget')
-        app.logger.debug(ID)
-        app.logger.debug(budget)
         finance_app.execute(text(f"""UPDATE {username}.`budget` SET `Budget` = :Budget WHERE (`idbudget` = :ID);"""),
                          {'ID':ID,'Budget':budget})
+        finance_app.commit()
+        finance_app.close()
+        return redirect(url_for('Budget'))
+
+@app.route('/editincome/', methods=['POST','GET'])
+def editincome():
+    username = session['username']
+    engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
+    finance_app = engine.connect()
+    if request.method=='POST':
+        Income = request.form.get('Income')
+        finance_app.execute(text(f"""UPDATE {username}.`budget` SET `Budget` = :Budget WHERE (`Category` = :ID);"""),
+                         {'ID':'Income','Income':Income})
         finance_app.commit()
         finance_app.close()
         return redirect(url_for('Budget'))
