@@ -9,7 +9,7 @@ Budget
         <form method="POST" action="/editincome/">
             <input type="hidden" id="ID" name="ID">
             <label class="form-label" for="Income">Income</label>
-            <input class="form-input" type="number" placeholder="Enter Income" id="Income" name="Income" required>
+            <input class="form-input" type="number" placeholder="Enter Income" id="Income" name="Income" step="0.01" required>
             <button type="submit">Submit</button>
         </form>
         <button onclick="closepopup()" style="margin-top: 10px; padding:5px 10px; background-color: #dc3545; color: #fff; border: none; border-radius: 3px;">Close</button>
@@ -21,7 +21,7 @@ Budget
         <form method="POST" action="/editbudget/">
             <input type="hidden" id="I" name="I">
             <label class="form-label" for="Budget">Budget</label>
-            <input class="form-input" type="number" id="Budget" name="Budget" required>
+            <input class="form-input" type="number" id="Budget" name="Budget" step="0.01" required>
             <button type="submit">Submit</button>
         </form>
         <button onclick="closepopup()" style="margin-top: 10px; padding:5px 10px; background-color: #dc3545; color: #fff; border: none; border-radius: 3px;">Close</button>

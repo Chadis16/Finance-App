@@ -574,6 +574,7 @@ def Budget():
     accttran = accttran.drop(columns=['Year','Month'])
     accttran = accttran.fillna('Total')
     transactions = pd.merge(transactions,bud,on='Category',how='right')
+    transactions = transactions[transactions['Category']!='Income']
     transactions = transactions.fillna(0)
     transactionstot = transactions['Amount'].sum()
     budgettot = transactions['Budget'].sum()
