@@ -19,7 +19,7 @@ Budget
     <div class="popup-content">
         <h2>Monthly Budget</h2>
         <form method="POST" action="/editbudget/">
-            <input type="number" id="ID" name="ID">
+            <input type="number" id="I" name="I">
             <label class="form-label" for="Budget">Budget</label>
             <input class="form-input" type="number" id="Budget" name="Budget" required>
             <button type="submit">Submit</button>
@@ -64,7 +64,7 @@ Budget
 </div>
 <script type="text/javascript">
     function editincome(ID,Income) {
-        document.getElementById('ID').value = ID;
+        document.getElementById('I').value = ID;
         document.getElementById('Income').value = Income;
         document.getElementById('popup1').style.display = 'flex';
     }
