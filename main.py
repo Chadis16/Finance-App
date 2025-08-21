@@ -582,6 +582,7 @@ def Budget():
     budgettot = transactions['Budget'].sum()
     monbud = budgettot
     remaining = income - monbud
+    incunform = income
     income = f"${income:,.2f}"
     monbud = f"${monbud:,.2f}"
     remaining = f"${remaining:,.2f}"
@@ -599,7 +600,7 @@ def Budget():
     transactions = transactions[['Category','Amount','Budget','Remaining','Edit']]
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
     accttran = accttran.to_html(escape=False,index=False,table_id='accttran')
-    return render_template('budget.html',transactions=transactions,mon=mon,year=y,monstr=monstr,accttran = accttran,income = income,monbud = monbud,remaining=remaining)
+    return render_template('budget.html',transactions=transactions,mon=mon,year=y,monstr=monstr,accttran = accttran,income = income,monbud = monbud,remaining=remaining,incunform=incunform)
 
 @app.route('/editbudget/', methods=['POST','GET'])
 def editbudget():
