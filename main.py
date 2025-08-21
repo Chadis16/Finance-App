@@ -545,7 +545,7 @@ def Budget():
     transactions = transactions[transactions['Category'].isin(['Bars/Alcohol','Car Payment','Coffee','Fast Food',
                                                                 'Grocieries','Insurance','Interest','Internet',
                                                                 'Loan Payment','Misc','Rent','Restaraunts','Shopping',
-                                                                'Streaming','Travel','Utilities'])]
+                                                                'Streaming','Travel','Utilities','CC Payment'])]
     years = transactions['Year'].unique()
     years = np.sort(years)
     if income is None:
