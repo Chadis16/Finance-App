@@ -16,7 +16,6 @@ from argon2 import PasswordHasher
 import logging
 import calendar
 
-
 logging.basicConfig(filename='flask_debug.log', level=logging.DEBUG)
 
 metadata = MetaData()
@@ -343,8 +342,8 @@ def rectran():
         finance_app.execute(text(f'INSERT INTO {username}.`recurring_transactions` (`Bill`, `Frequency`, `Start_Date`, `Amount`, `Account`) VALUES (:Bill, :Frequency, :Start_Date, :Amount, :Account)'),
                          {'Bill':Bill,'Frequency':Frequency,'Start_Date':StartDate,'Amount':Amount,'Account':Account})
         finance_app.commit()
-        finance_app.close()
-        return redirect(url_for('BalanceTracking'))
+    finance_app.close()
+    return redirect(url_for('BalanceTracking'))
 
 @app.route('/recurringtrandel/', methods=['POST'])
 def rectrandel():
@@ -355,8 +354,8 @@ def rectrandel():
         Bill = request.form.get('ID')
         finance_app.execute(text(f"DELETE FROM {username}.`recurring_transactions` WHERE (`idrecurring_transactions` = :Bill)"),{'Bill':Bill})
         finance_app.commit()
-        finance_app.close()
-        return redirect(url_for('BalanceTracking'))
+    finance_app.close()
+    return redirect(url_for('BalanceTracking'))
     
 @app.route('/recurringtranpaid/', methods=['POST'])
 def rectranpaid():
@@ -391,8 +390,8 @@ def rectranpaid():
             NewDate = StartDate + timedelta(days=365)
             finance_app.execute(text(f"UPDATE {username}.`recurring_transactions` SET `Start_Date` = :Date WHERE (`idrecurring_transactions` = :Bill)"),{'Bill':ID,'Date':NewDate})
         finance_app.commit()
-        finance_app.close()
-        return redirect(url_for('BalanceTracking'))
+    finance_app.close()
+    return redirect(url_for('BalanceTracking'))
     
 @app.route('/recurringtranedit/', methods=['POST','GET'])
 def rectranedit():
@@ -409,8 +408,8 @@ def rectranedit():
         finance_app.execute(text(f'UPDATE {username}.`recurring_transactions` SET `Bill` = :Bill, `Frequency` = :Frequency, `Start_Date` = :Start_Date, `Amount` = :Amount, `Account` = :Account WHERE (`idrecurring_transactions` = :ID);'),
                          {'ID':ID,'Bill':Bill,'Frequency':Frequency,'Start_Date':StartDate,'Amount':Amount,'Account':Account})
         finance_app.commit()
-        finance_app.close()
-        return redirect(url_for('BalanceTracking'))       
+    finance_app.close()
+    return redirect(url_for('BalanceTracking'))       
 
 @app.route('/Transactions/', methods=['POST','GET'])
 def Transactions():
@@ -446,8 +445,8 @@ def trandel():
         Tran = request.form.get('ID')
         finance_app.execute(text(f"DELETE FROM {username}.`transactions` WHERE (`idTransactions` = :Tran)"),{'Tran':Tran})
         finance_app.commit()
-        finance_app.close()
-        return redirect(url_for('Transactions'))
+    finance_app.close()
+    return redirect(url_for('Transactions'))
 
 @app.route('/tranadd/', methods=['POST','GET'])
 def tranadd():
@@ -463,8 +462,8 @@ def tranadd():
         finance_app.execute(text(f"""INSERT INTO {username}.`transactions` (`Date`, `Transaction`, `Amount`, `Category`, `Account`) VALUES (:Date, :Transaction, :Amount, :Category, :Account)"""),
                          {'Date':Date,'Transaction':Transaction,'Amount':Amount,'Category':Category,'Account':Account})
         finance_app.commit()
-        finance_app.close()
-        return redirect(url_for('Transactions'))
+    finance_app.close()
+    return redirect(url_for('Transactions'))
 
 @app.route('/tranedit/', methods=['POST','GET'])
 def tranedit():
@@ -481,8 +480,8 @@ def tranedit():
         finance_app.execute(text(f"""UPDATE {username}.`transactions` SET `Date` = :Date, `Transaction` = :Transaction, `Amount` = :Amount, `Category` = :Category, `Account` = :Account WHERE (`idTransactions` = :ID);"""),
                          {'ID':ID,'Date':Date,'Transaction':Transaction,'Amount':Amount,'Category':Category,'Account':Account})
         finance_app.commit()
-        finance_app.close()
-        return redirect(url_for('Transactions')) 
+    finance_app.close()
+    return redirect(url_for('Transactions')) 
 
 @app.route('/tranupload/', methods=['POST','GET'])
 def tranupload():
@@ -502,8 +501,8 @@ def tranupload():
             finance_app.execute(text(f"""INSERT INTO {username}.`transactions` (`Date`, `Transaction`, `Amount`, `Category`, `Account`) VALUES (:Date, :Transaction, :Amount, :Category, :Account)"""),
                             {'Date':Date,'Transaction':Transaction,'Amount':Amount,'Category':Category,'Account':Account})
         finance_app.commit()
-        finance_app.close()
-        return redirect(url_for('Transactions'))
+    finance_app.close()
+    return redirect(url_for('Transactions'))
 
 def Buded(x):
     Buds = Bud()
@@ -614,8 +613,8 @@ def editbudget():
         finance_app.execute(text(f"""UPDATE {username}.`budget` SET `Budget` = :Budget WHERE (`idbudget` = :ID);"""),
                          {'ID':ID,'Budget':budget})
         finance_app.commit()
-        finance_app.close()
-        return redirect(url_for('Budget'))
+    finance_app.close()
+    return redirect(url_for('Budget'))
 
 @app.route('/editincome/', methods=['POST','GET'])
 def editincome():
@@ -628,8 +627,8 @@ def editincome():
         finance_app.execute(text(f"""UPDATE {username}.`budget` SET `Budget` = :Income WHERE (`idbudget` = :ID);"""),
         {'ID':ID,'Income':Income})
         finance_app.commit()
-        finance_app.close()
-        return redirect(url_for('Budget'))
+    finance_app.close()
+    return redirect(url_for('Budget'))
 
 @app.route('/Investments/')
 def Investment():
