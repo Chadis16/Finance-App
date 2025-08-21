@@ -625,7 +625,8 @@ def editincome():
     if request.method=='POST':
         ID = request.form.get('ID')
         Income = request.form.get('Income')
-        finance_app.execute(text(f"""UPDATE {username}.`budget` SET `Budget` = {Income} WHERE (`idbudget` = {ID});"""))
+        finance_app.execute(text(f"""UPDATE {username}.`budget` SET `Budget` = :Income WHERE (`idbudget` = :ID);"""),
+        {'ID':ID,'Income':Income})
         finance_app.commit()
         finance_app.close()
         return redirect(url_for('Budget'))
