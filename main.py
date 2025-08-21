@@ -521,7 +521,8 @@ def Budget():
     bud = Bud()
     income = bud[bud['Category']=='Income']
     income = income.iat[0,2]
-    app.logger.debug(income)
+    incid = income.iat[0,1]
+    app.logger.debug(incid)
     today = date.today()
     currentmon = today.month
     currentyear = today.year
@@ -600,7 +601,7 @@ def Budget():
     transactions = transactions[['Category','Amount','Budget','Remaining','Edit']]
     transactions = transactions.to_html(escape=False,index=False,table_id='Budget')
     accttran = accttran.to_html(escape=False,index=False,table_id='accttran')
-    return render_template('budget.html',transactions=transactions,mon=mon,year=y,monstr=monstr,accttran = accttran,income = income,monbud = monbud,remaining=remaining,incunform=incunform)
+    return render_template('budget.html',incid=incid,transactions=transactions,mon=mon,year=y,monstr=monstr,accttran = accttran,income = income,monbud = monbud,remaining=remaining,incunform=incunform)
 
 @app.route('/editbudget/', methods=['POST','GET'])
 def editbudget():
@@ -622,9 +623,9 @@ def editincome():
     engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
     finance_app = engine.connect()
     if request.method=='POST':
+        ID = request.form.get('ID')
         Income = request.form.get('Income')
-        finance_app.execute(text(f"""UPDATE {username}.`budget` SET `Budget` = :Budget WHERE (`Category` = :ID);"""),
-                         {'ID':'Income','Income':Income})
+        finance_app.execute(text(f"""UPDATE {username}.`budget` SET `Budget` = {Income} WHERE (`idbudget` = {ID});"""))
         finance_app.commit()
         finance_app.close()
         return redirect(url_for('Budget'))

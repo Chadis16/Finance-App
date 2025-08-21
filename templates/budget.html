@@ -7,6 +7,7 @@ Budget
     <div class="popup-content">
         <h2>Monthly Income</h2>
         <form method="POST" action="/editincome/">
+            <input type="hidden" id="ID" name="ID">
             <label class="form-label" for="Income">Income</label>
             <input class="form-input" type="number" value="{{ incunform }}" id="Income" name="Income" step="0.01" required>
             <button type="submit">Submit</button>
@@ -28,7 +29,7 @@ Budget
 </div>
 <div>
     <label for="Edit">Monthly Income: {{ income }}</label>
-    <button id="Edit" name="Edit" onclick="editincome({{ incunform }})">Edit</button>
+    <button id="Edit" name="Edit" onclick="editincome({{ incunform }},{{ incid }})">Edit</button>
     <p>Monthly Budget: {{ monbud }}</p>
     <p>Remaining: {{ remaining }}</p>
 </div>
@@ -64,7 +65,8 @@ Budget
     </div>
 </div>
 <script type="text/javascript">
-    function editincome(Income) {
+    function editincome(Income,ID) {
+        document.getElementById('ID').value = ID
         document.getElementById('Income').value = Income;
         document.getElementById('popup1').style.display = 'flex';
     }
