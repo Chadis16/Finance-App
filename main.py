@@ -520,7 +520,7 @@ def Budget():
     month = request.form.get('Month')
     bud = Bud()
     income = bud[bud['Category']=='Income']
-    incid = income.iat[0,1]
+    incid = income.iat[0,0]
     income = income.iat[0,2]
     app.logger.debug(incid)
     today = date.today()
