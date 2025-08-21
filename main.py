@@ -326,8 +326,8 @@ def addacct():
         finance_app.execute(text(f"""INSERT INTO {username}.`transactions` (`Date`, `Transaction`, `Amount`, `Category`, `Account`) VALUES (:Date, 'Starting Balance', :Amount, 'Starting Balance', :Account);"""),
                          {'Date':OpenDate,'Account':Account,'Amount':StartingBal})
         finance_app.commit()
-        finance_app.close()
-        return redirect(url_for('BalanceTracking'))
+    finance_app.close()
+    return redirect(url_for('BalanceTracking'))
 
 @app.route('/recurringtran/', methods=['POST'])
 def rectran():
