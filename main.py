@@ -519,7 +519,7 @@ def Budget():
     year = request.form.get('Year')
     month = request.form.get('Month')
     bud = Bud()
-    income = bud['Category'].iloc[2]
+    income = bud[bud['Category']=='Income']
     app.logger.debug(income)
     today = date.today()
     currentmon = today.month
