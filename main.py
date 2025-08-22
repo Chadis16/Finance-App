@@ -644,7 +644,7 @@ def debts():
 def Debts():
     debt = debts()
     debt = debt.to_html(escape=False,index=False,table_id='debts')
-    return render_template('debts.html',debts=debts)
+    return render_template('debts.html',debts=debt)
 
 @app.route('/Investments/')
 def Investment():
