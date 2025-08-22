@@ -679,14 +679,19 @@ def EditDebts():
     finance_app.close()
     return redirect(url_for('Debts')) 
 
-# @app.route('/debtpaid/', methods=['POST'])
-# def debtpaid():
-#     username = session['username']
-#     engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
-#     finance_app = engine.connect()
-#     if request.method == 'POST':
-#     finance_app.close()
-#     return redirect(url_for('BalanceTracking'))
+@app.route('/debtpaid/', methods=['POST'])
+def debtpaid():
+    username = session['username']
+    engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
+    finance_app = engine.connect()
+    if request.method == 'POST':
+        ID = request.form.get('ID')
+        DueDate = request.form.get('DueDate')
+        finance_app.execute(text(f"""UPDATE {username}.`debts` SET `Due Date` = :DueDate WHERE (`iddebts` = :ID);"""),
+                         {'ID':ID,'DueDate':DueDate})
+        finance_app.commit()
+    finance_app.close()
+    return redirect(url_for('BalanceTracking'))
 
 @app.route('/Investments/')
 def Investment():
