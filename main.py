@@ -686,9 +686,9 @@ def debtpaid():
     finance_app = engine.connect()
     if request.method == 'POST':
         ID = int(request.form.get('ID'))
-        debts = debts()
-        debts = debts[debts['iddebts']==ID]
-        app.logger.debug(debts)
+        debt = debts()
+        debt = debt[debt['iddebts']==ID]
+        app.logger.debug(debt)
         # DueDate = request.form.get('DueDate')
         app.logger.debug(ID)
         app.logger.debug(DueDate)
