@@ -690,9 +690,9 @@ def debtpaid():
         debt = debt[debt['iddebts']==ID]
         debt = debt.iat[0,4]
         app.logger.debug(debt)
-        # DueDate = request.form.get('DueDate')
+        DueDate = debt + relativedelta(months=1)
         app.logger.debug(ID)
-        # app.logger.debug(DueDate)
+        app.logger.debug(DueDate)
         # DueDate = DueDate + relativedelta(months=1)
         # finance_app.execute(text(f"""UPDATE {username}.`debts` SET `Due Date` = :DueDate WHERE (`iddebts` = :ID);"""),
         #                  {'ID':ID,'DueDate':DueDate})
