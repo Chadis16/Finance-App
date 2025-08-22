@@ -651,6 +651,7 @@ def debts():
     finance_app = engine.connect()
     debts = pd.read_sql('SELECT * from debts;',finance_app)
     debts['Edit'] = debts['iddebts'].apply(lambda x: f'<button onclick="editdebt({x},\'{eddebt(x,'Account',debts)}\',\'{eddebt(x,'Interest Rate',debts)}\',\'{eddebt(x,'Min Payment',debts)}\',\'{eddebt(x,'Due Date',debts)}\')">Edit</button>')
+    debts['Mark Paid'] = debts['iddebts'].apply(lambda x: f'<form method="POST" action="/debtpaid/"><input type="hidden" id="ID" value="{x}"><input type="hidden" id="DDate" name="DDate" value="{DueDate}"><button type="submit">Mark Paid</button></form>)
     debts = debts.drop(columns=['iddebts'])
     finance_app.close()
     return debts
@@ -677,6 +678,15 @@ def EditDebts():
         finance_app.commit()
     finance_app.close()
     return redirect(url_for('Debts')) 
+
+# @app.route('/debtpaid/', methods=['POST'])
+# def debtpaid():
+#     username = session['username']
+#     engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
+#     finance_app = engine.connect()
+#     if request.method == 'POST':
+#     finance_app.close()
+#     return redirect(url_for('BalanceTracking'))
 
 @app.route('/Investments/')
 def Investment():
