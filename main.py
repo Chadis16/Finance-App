@@ -685,7 +685,7 @@ def debtpaid():
     engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
     finance_app = engine.connect()
     if request.method == 'POST':
-        ID = request.form.get('ID')
+        ID = int(request.form.get('ID'))
         DueDate = request.form.get('DueDate')
         DueDate = DueDate + relativedelta(months=1)
         finance_app.execute(text(f"""UPDATE {username}.`debts` SET `Due Date` = :DueDate WHERE (`iddebts` = :ID);"""),
