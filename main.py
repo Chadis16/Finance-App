@@ -661,6 +661,23 @@ def Debts():
     debt = debt.to_html(escape=False,index=False,table_id='debts')
     return render_template('debts.html',debts=debt)
 
+@app.route('/debtedit/',methods=['POST','GET'])
+def EditDebts():
+    username = session['username']
+    engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
+    finance_app = engine.connect()
+    if request.method == 'POST':
+        ID = request.form.get('ID')
+        Account = request.form.get('Account')
+        IntRate = request.form.get('IntRate')
+        MinPayment = request.form.get('MinPayment')
+        DueDate = request.form.get('DueDate')
+        finance_app.execute(text(f"""UPDATE {username}.`debts` SET `Account` = :Account, `Interest Rate` = :IntRate, `Min Payment` = :MinPayment, `Due Date` = :DueDate WHERE (`iddebts` = :ID);"""),
+                         {'ID':ID,'Account':Account,'IntRate':IntRate,'MinPayment':MinPayment,'DueDate':DueDate})
+        finance_app.commit()
+    finance_app.close()
+    return redirect(url_for('Debts')) 
+
 @app.route('/Investments/')
 def Investment():
     investments = investment_transactions.groupby(['Account','Ticker'])['Quantity'].sum()

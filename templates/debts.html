@@ -6,7 +6,7 @@ Debts
 <div id="popup1" class="popup">
     <div class="popup-content">
         <h2>Debt</h2>
-        <form method="POST" action="/recurringtranedit/">
+        <form method="POST" action="/debtedit/">
             <input type="hidden" id="ID" name="ID">
             <label class="form-label" for="Account">Account</label>
             <input class="form-input" type="text" id="Account" name="Account" readonly>
@@ -19,13 +19,6 @@ Debts
             <br>
             <label class="form-label" for="DueDate">Due Date</label>
             <input class="form-input" type="date" id="DueDate" name="DueDate" required>
-            <br>
-            <label class="form-label" for="Account1">Account</label>
-            <select name="Account" id="Account1">
-                {% for allacct in allacct %}
-                <option value="{{ allacct }}">{{ allacct }}</option>
-                {% endfor %}
-            </select>
             <br>
             <button type="submit">Submit</button>
         </form>
