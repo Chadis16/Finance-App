@@ -651,14 +651,14 @@ def debts():
     finance_app = engine.connect()
     debts = pd.read_sql('SELECT * from debts;',finance_app)
     debts['Edit'] = debts['iddebts'].apply(lambda x: f'<button onclick="editdebt({x},\'{eddebt(x,'Account',debts)}\',\'{eddebt(x,'Interest Rate',debts)}\',\'{eddebt(x,'Min Payment',debts)}\',\'{eddebt(x,'Due Date',debts)}\')">Edit</button>')
-    debts['Mark Paid'] = debts['iddebts'].apply(lambda x: f'<form method="POST" action="/debtpaid/"><input type="hidden" id="ID" value="{x}"><input type="hidden" name="DDate" value="{eddebt(x,'Due Date',debts)}"><button type="submit">Mark Paid</button></form>')
-    debts = debts.drop(columns=['iddebts'])
+    debts['Mark Paid'] = debts['iddebts'].apply(lambda x: f'<form method="POST" action="/debtpaid/"><input type="hidden" value="{x}"><input type="hidden" name="DDate" value="{eddebt(x,'Due Date',debts)}"><button type="submit">Mark Paid</button></form>')
     finance_app.close()
     return debts
 
 @app.route('/Debts', methods=['POST','GET'])
 def Debts():
     debt = debts()
+    debt = debt.drop(columns=['iddebts'])
     debt = debt.to_html(escape=False,index=False,table_id='debts')
     return render_template('debts.html',debts=debt)
 
