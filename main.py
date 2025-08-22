@@ -632,11 +632,26 @@ def editincome():
     finance_app.close()
     return redirect(url_for('Budget'))
 
+def eddebt(x,y,t):
+    debt = t
+    debt = debt[debt['iddebts']==x]
+    if y == 'Account':
+        debt = debt.iat[0,1]
+    elif y == 'Interest Rate':
+        debt = debt.iat[0,2]
+    elif y == 'Min Payment':
+        debt = debt.iat[0,3]
+    elif y == 'Due Date':
+        debt = debt.iat[0,4]
+    return debt
+
 def debts():
     username = session['username']
     engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
     finance_app = engine.connect()
     debts = pd.read_sql('SELECT * from debts;',finance_app)
+    debts['Edit'] = debts['iddebts'].apply(lambda x: f'<button onclick="editdebt({x},\'{eddebt(x,'Account',debts)}\',\'{eddebt(x,'Interest Rate',debts)}\',\'{eddebt(x,'Min Payment',debts)}\',\'{eddebt(x,'Due Date',debts)}\')">Edit</button>')
+    debts = debts.drop(columns=['iddebts'])
     finance_app.close()
     return debts
 
