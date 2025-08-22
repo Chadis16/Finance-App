@@ -687,11 +687,12 @@ def debtpaid():
     if request.method == 'POST':
         ID = request.form.get('ID')
         DueDate = request.form.get('DueDate')
+        DueDate = DueDate + relativedelta(months=1)
         finance_app.execute(text(f"""UPDATE {username}.`debts` SET `Due Date` = :DueDate WHERE (`iddebts` = :ID);"""),
                          {'ID':ID,'DueDate':DueDate})
         finance_app.commit()
     finance_app.close()
-    return redirect(url_for('BalanceTracking'))
+    return redirect(url_for('Debts'))
 
 @app.route('/Investments/')
 def Investment():
