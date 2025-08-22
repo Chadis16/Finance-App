@@ -688,6 +688,8 @@ def debtpaid():
         ID = int(request.form.get('ID'))
         DueDate = request.form.get('DueDate')
         DueDate = DueDate + relativedelta(months=1)
+        app.logger.debug(ID)
+        app.logger.debug(DueDate)
         finance_app.execute(text(f"""UPDATE {username}.`debts` SET `Due Date` = :DueDate WHERE (`iddebts` = :ID);"""),
                          {'ID':ID,'DueDate':DueDate})
         finance_app.commit()
