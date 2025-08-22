@@ -511,7 +511,6 @@ def Buded(x):
     app.logger.debug(Buds)
     return Buds
 
-
 @app.route('/Budget', methods=['POST','GET'])
 def Budget():
     username = session['username']
@@ -629,6 +628,10 @@ def editincome():
         finance_app.commit()
     finance_app.close()
     return redirect(url_for('Budget'))
+
+@app.route('/Debts', methods=['POST','GET'])
+def Debts():
+    return render_template('debts.html')
 
 @app.route('/Investments/')
 def Investment():
