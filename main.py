@@ -632,19 +632,19 @@ def editincome():
     finance_app.close()
     return redirect(url_for('Budget'))
 
-def debts():
-    username = session['username']
-    engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
-    finance_app = engine.connect()
-    debts = pd.read_sql('SELECT * from debts;',finance_app)
-    finance_app.close()
-    return debts
+# def debts():
+#     username = session['username']
+#     engine = create_engine(f"mysql+mysqlconnector://root:Printhelloworld1!@127.0.0.1/{username}", echo=True)
+#     finance_app = engine.connect()
+#     debts = pd.read_sql('SELECT * from debts;',finance_app)
+#     finance_app.close()
+#     return debts
 
-@app.route('/Debts', methods=['POST','GET'])
-def Debts():
-    debt = debts()
-    debt = debt.to_html(escape=False,index=False,table_id='debts')
-    return render_template('debts.html',debts=debts)
+# @app.route('/Debts', methods=['POST','GET'])
+# def Debts():
+#     debt = debts()
+#     debt = debt.to_html(escape=False,index=False,table_id='debts')
+#     return render_template('debts.html',debts=debts)
 
 @app.route('/Investments/')
 def Investment():
