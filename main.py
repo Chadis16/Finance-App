@@ -686,13 +686,16 @@ def debtpaid():
     finance_app = engine.connect()
     if request.method == 'POST':
         ID = int(request.form.get('ID'))
-        DueDate = request.form.get('DueDate')
+        debts = debts()
+        debts = debts[debts['iddebts']==ID]
+        app.logger.debug(debts)
+        # DueDate = request.form.get('DueDate')
         app.logger.debug(ID)
         app.logger.debug(DueDate)
-        DueDate = DueDate + relativedelta(months=1)
-        finance_app.execute(text(f"""UPDATE {username}.`debts` SET `Due Date` = :DueDate WHERE (`iddebts` = :ID);"""),
-                         {'ID':ID,'DueDate':DueDate})
-        finance_app.commit()
+        # DueDate = DueDate + relativedelta(months=1)
+        # finance_app.execute(text(f"""UPDATE {username}.`debts` SET `Due Date` = :DueDate WHERE (`iddebts` = :ID);"""),
+        #                  {'ID':ID,'DueDate':DueDate})
+        # finance_app.commit()
     finance_app.close()
     return redirect(url_for('Debts'))
 
