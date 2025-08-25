@@ -157,6 +157,10 @@ body {
     margin-left: 30px;
 }
 
+.navbar-item:hover {
+    color: blue;
+}
+   
 .body-content {
     position: relative;
     padding: 5px;
@@ -172,17 +176,17 @@ body {
 }
 
 .column {
-    flex: 50%;
+    width: 50%;
     padding: 5px;
 }
 
 .column-left {
-    flex: 75%;
+    width: 75%;
     padding: 5px;
 }
 
 .column-right {
-    flex: 25%;
+    width: 25%;
     padding: 5px;
 }
 
@@ -269,6 +273,7 @@ td:nth-child(8) {
     }
 
 } */
+
 
 
 
