@@ -166,7 +166,7 @@ body {
 }
    
 .body-content {
-    position: relative;
+    position: absolute;
     padding: 5px;
     font-family: 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     z-index: 2;
