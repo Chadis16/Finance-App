@@ -650,7 +650,7 @@ def debts():
     finance_app = engine.connect()
     account = Account()
     debts = pd.read_sql('SELECT * from debts;',finance_app)
-    debts = pd.merge(debts,account,on=['Account'],how='right')
+    debts = pd.merge(debts,account,on=['Account'],how='left')
     debts['Edit'] = debts['iddebts'].apply(lambda x: f'<button onclick="editdebt({x},\'{eddebt(x,'Account',debts)}\',\'{eddebt(x,'Interest Rate',debts)}\',\'{eddebt(x,'Min Payment',debts)}\',\'{eddebt(x,'Due Date',debts)}\')">Edit</button>')
     debts['Mark Paid'] = debts['iddebts'].apply(lambda x: f'<form method="POST" action="/debtpaid/"><input type="hidden" name="ID" value="{x}"><input type="hidden" name="DDate" value="{eddebt(x,'Due Date',debts)}"><button type="submit">Mark Paid</button></form>')
     finance_app.close()
