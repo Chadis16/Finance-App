@@ -157,12 +157,12 @@ body {
     margin-left: 30px;
 }
 
-.navbar-brand {
-    color: lightblue;
+.navbar-brand:hover {
+    color: rgb(133, 218, 247);
 }
 
 .navbar-item:hover {
-    color: lightblue;
+    color: rgb(133, 218, 247);
 }
    
 .body-content {
