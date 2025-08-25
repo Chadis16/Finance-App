@@ -693,6 +693,10 @@ def debtpaid():
     finance_app.close()
     return redirect(url_for('Debts'))
 
+@app.route('/Accounts')
+def Accounts():
+    return render_template('Accounts.html')
+
 @app.route('/Investments/')
 def Investment():
     investments = investment_transactions.groupby(['Account','Ticker'])['Quantity'].sum()
