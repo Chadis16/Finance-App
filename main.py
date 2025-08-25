@@ -374,7 +374,7 @@ def rectranpaid():
         Bills = Bills[Bills['idrecurring_transactions']==ID]
         Bill = Bills.iat[0,1]
         StartDate = Bills.iat[0,3]
-        print(Frequency)
+        Frequency = Bills.iat[0,2]
         if Frequency == 'One Time':
             finance_app.execute(text(f"DELETE FROM {username}.`recurring_transactions` WHERE (`idrecurring_transactions` = :Bill)"),{'Bill':ID})
         elif Frequency == 'Weekly':
@@ -728,6 +728,7 @@ def Investment():
 if __name__ == '__main__':
 
     app.run(host='0.0.0.0')
+
 
 
 
