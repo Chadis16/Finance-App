@@ -326,8 +326,9 @@ def addacct():
         finance_app.execute(text(f"""INSERT INTO {username}.`transactions` (`Date`, `Transaction`, `Amount`, `Category`, `Account`) VALUES (:Date, 'Starting Balance', :Amount, 'Starting Balance', :Account);"""),
                          {'Date':OpenDate,'Account':Account,'Amount':StartingBal})
         if AccountType in ['Credit Card','Student Loan','Personal Loan','Car Loan','Mortgage']:
-            finance_app.execute(text(f"""INSERT INTO {username}.`debts` ('Account') VALUES (:Account);"""),
-                         {'Account':Account})
+            finance_app.execute(text(f"""INSERT INTO {username}.`debts` (`Account`) VALUES (:Account);"""),{'Account':Account})
+            if AccountType == 'Credit Card':
+                finance_app.execute(text(f"""INSERT INTO {username}.`creditcards` (`Account`) VALUES (:Account);"""),{'Account':Account})
         finance_app.commit()
     finance_app.close()
     return redirect(url_for('BalanceTracking'))
